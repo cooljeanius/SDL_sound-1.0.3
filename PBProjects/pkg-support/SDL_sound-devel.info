@@ -1,0 +1,15 @@
+Title SDL_sound 0.1.5
+Version 1
+Description SDL_sound Library for Mac OS X (http://www.icculus.org/SDL_sound/)
+DefaultLocation /Developer/Documentation/SDL
+Diskname (null)
+DeleteWarning 
+NeedsAuthorization YES
+DisableStop NO
+UseUserMask YES
+Application NO
+Relocatable NO
+Required NO
+InstallOnly NO
+RequiresReboot NO
+InstallFat NO

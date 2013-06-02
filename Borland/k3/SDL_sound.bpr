@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.10"/>
+    <PROJECT value="libSDL_sound.so"/>
+    <OBJFILES value="../../SDL_sound.o ../../audio_convert.o ../../extra_rwops.o 
+      ../../decoders/mp3.o ../../decoders/wav.o"/>
+    <RESFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES)"/>
+    <LIBFILES value="/usr/lib/libSDL.so"/>
+    <LIBRARIES value=""/>
+    <SPARELIBS value=""/>
+    <PACKAGES value="rtl.bpi visualclx.bpi dataclx.bpi visualdbclx.bpi netclx.bpi 
+      netdataclx.bpi xmlrtl.bpi indy.bpi webdsnapclx.bpi websnapclx.bpi 
+      soaprtl.bpi"/>
+    <PATHCPP value=".;../..:../../decoders"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)/lib/debug"/>
+    <RELEASELIBPATH value="$(BCB)/lib/release"/>
+    <LINKER value="ilink"/>
+    <USERDEFINES value="_DEBUG:SDL_SOUND_DLL_EXPORTS:SOUND_SUPPORTS_MP3:SOUND_SUPPORTS_WAV:SOUND_SUPPORTS_OGG"/>
+    <SYSDEFINES value="_NO_VCL:USEPACKAGES:_RTLDLL"/>
+    <MAINSOURCE value="SDL_sound.bpf"/>
+    <INCLUDEPATH value="../../decoders:../..:$(BCB)/include:/usr/include:../../../include:../../../smpeg-0.4.4"/>
+    <LIBPATH value="$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <CFLAG1 value="-tD -VP -Od -H=$(HOME)/.borland/clx69.csm -Hc -Vx -X- -r- -a8 -b- -k -y -v 
+      -vi- -c"/>
+    <PFLAGS value="-P -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-N&quot;&quot; -D&quot;&quot; -aa -Tpd -x -Gn -v"/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="borinitso.o $(PACKAGES) $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) libborcrtl.so libborstl.so libborunwind.so 
+      libpthread.so libc.so libm.so libdl.so "/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="SDL_sound.bpf" FORMNAME="" UNITNAME="SDL_sound" CONTAINERID="BPF" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="../../SDL_sound.c" FORMNAME="" UNITNAME="SDL_sound" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="/usr/lib/libSDL.so" FORMNAME="" UNITNAME="libSDL.so" CONTAINERID="SOTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="../../audio_convert.c" FORMNAME="" UNITNAME="audio_convert.c" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="../../extra_rwops.c" FORMNAME="" UNITNAME="extra_rwops.c" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="../../decoders/mp3.c" FORMNAME="" UNITNAME="mp3.c" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="../../decoders/wav.c" FORMNAME="" UNITNAME="wav.c" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[HistoryLists\hlIncludePath]
+Count=11
+Item0=../../decoders:../../:$(BCB)/include:/usr/include:../../../include:../../../smpeg-0.4.4
+Item1=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/include:/usr/include:../../../include:../../../smpeg-0.4.4
+Item2=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/include:/usr/include:../../../include
+Item3=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:../..:../../decoders:$(BCB)/include:/usr/include:../../../include
+Item4=../..:../../decoders:$(BCB)/include:/usr/include:../../../include
+Item5=../..:../../decoders:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include:/usr/include/SDL
+Item6=../../:../../decoders:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include:/usr/include/SDL/
+Item7=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include:../../../include
+Item8=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include:../../include
+Item9=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include:../../include
+Item10=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/include/stlport:$(BCB)/include:$(BCB)/include/vcl:/usr/include
+
+[HistoryLists\hlLibraryPath]
+Count=5
+Item0=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin
+Item1=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5/decoders:$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:../..:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin
+Item2=../..:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin
+Item3=../../:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin
+Item4=$(BCB)/headers/SDL-1.2.4/SDL_sound-0.1.5:$(BCB)/lib/obj:$(BCB)/lib:/usr/lib:/lib:/usr/X11R6/lib:$(BCB)/bin
+
+[HistoryLists\hlConditionals]
+Count=9
+Item0=_DEBUG:SDL_SOUND_DLL_EXPORTS:SOUND_SUPPORTS_MP3:SOUND_SUPPORTS_WAV:SOUND_SUPPORTS_OGG
+Item1=_DEBUG:SDL_SOUND_DLL_EXPORTS:SOUND_SUPPORTS_MP3:SOUND_SUPPORTS_WAV:SOUND_SUPPORTS_OGG:SOUND_SUPPORTS_MIDI
+Item2=_DEBUG:SDL_SOUND_DLL_EXPORTS:SOUND_SUPPORTS_MP3:SOUND_SUPPORTS_WAV
+Item3=_DEBUG:SDL_SOUND_DLL_EXPORTS:SOUND_SUPPORTS_MP3
+Item4=_DEBUG:SDL_SOUND_DLL_EXPORTS
+Item5=_DEBUG:SDL_SOUND_DLL_EXPORTS:linux
+Item6=_DEBUG:SDL_SOUND_DLL_EXPORTS:LINUX
+Item7=_DEBUG:SDL_SOUND_DLL_EXPORTS:SOUND_SUPPORTS_MP3:SOUND_SUPPORTS_OGG
+Item8=_DEBUG
+
+[Debugging]
+DebugSourceDirs=
+
+[Parameters]
+RunParams=
+Launcher=/usr/X11R6/bin/xterm -T KylixDebuggerOutput -e bash -i -c %debuggee%
+UseLauncher=0
+DebugCWD=
+HostApplication=
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+
+[Linker]
+LibPrefix=
+LibPrefixDefined=0
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

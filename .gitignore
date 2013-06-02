@@ -1,0 +1,9 @@
+*.o
+*~
+*.build
+*build/*
+*/*build/*
+*/*/*build/*
+*.pbxuser
+*.perspectivev3
+*.app
