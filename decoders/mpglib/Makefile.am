@@ -2,7 +2,7 @@ if USE_MPGLIB
 noinst_LTLIBRARIES = libmpglib.la
 endif
 
-INCLUDES = -I$(top_srcdir)
+AM_CPPFLAGS = -I$(top_srcdir)
 libmpglib_la_CFLAGS = -DLAYER1 -DLAYER2 -DLAYER3
 
 libmpglib_la_SOURCES =	\
