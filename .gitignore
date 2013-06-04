@@ -27,4 +27,7 @@ config.h
 playsound/playsound
 playsound/playsound_simple
 *Makefile
+confdefs.h
+conftest.c
+conftest.err
 
