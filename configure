@@ -644,6 +644,8 @@ USE_TIMIDITY_TRUE
 LIBOBJS
 ALLOCA
 XMKMF
+SPEEX_LIBS
+SPEEX_CFLAGS
 VORBISENC_LIBS
 VORBISFILE_LIBS
 VORBIS_LIBS
@@ -840,6 +842,10 @@ with_vorbis_includes
 enable_vorbistest
 enable_flac
 enable_speex
+with_speex
+with_speex_libraries
+with_speex_includes
+enable_speextest
 enable_physfs
 enable_altcvt
 with_x
@@ -1516,6 +1522,7 @@ and run a test SMPEG program
   --disable-vorbistest    Do not try to compile and run a test Vorbis program
   --enable-flac              enable FLAC decoding via libFLAC default=yes
   --enable-speex               enable SPX decoding via libspeex default=yes
+  --disable-speextest       Do not try to compile and run a test Speex program
   --enable-physfs            enable PhysicsFS in playsound default=yes
   --enable-altcvt            enable EXPERIMENTAL audio converter default=no
 
@@ -1548,6 +1555,9 @@ where SMPEG is installed (optional)
   --with-vorbis-includes=DIR
                           Directory where libvorbis header files are installed
                           (optional)
+  --with-speex=PFX   Prefix where libspeex is installed (optional)
+  --with-speex-libraries=DIR   Directory where libspeex library is installed (optional)
+  --with-speex-includes=DIR   Directory where libspeex header files are installed (optional)
   --with-x                use the X Window System
 
 Some influential environment variables:
@@ -17415,6 +17425,154 @@ $as_echo "#define SOUND_SUPPORTS_SPEEX 1" >>confdefs.h
 
   fi
 fi
+
+
+# Check whether --with-speex was given.
+if test "${with_speex+set}" = set; then :
+  withval=$with_speex; speex_prefix="$withval"
+else
+  speex_prefix=""
+fi
+
+
+# Check whether --with-speex-libraries was given.
+if test "${with_speex_libraries+set}" = set; then :
+  withval=$with_speex_libraries; speex_libraries="$withval"
+else
+  speex_libraries=""
+fi
+
+
+# Check whether --with-speex-includes was given.
+if test "${with_speex_includes+set}" = set; then :
+  withval=$with_speex_includes; speex_includes="$withval"
+else
+  speex_includes=""
+fi
+
+# Check whether --enable-speextest was given.
+if test "${enable_speextest+set}" = set; then :
+  enableval=$enable_speextest;
+else
+  enable_speextest=yes
+fi
+
+
+  if test "x$speex_libraries" != "x" ; then
+    SPEEX_LIBS="-L$speex_libraries"
+  elif test "x$speex_prefix" != "x" ; then
+    SPEEX_LIBS="-L$speex_prefix/lib"
+  elif test "x$prefix" != "xNONE" ; then
+    SPEEX_LIBS="-L$prefix/lib"
+  fi
+
+  SPEEX_LIBS="$SPEEX_LIBS -lspeex"
+
+  if test "x$speex_includes" != "x" ; then
+    SPEEX_CFLAGS="-I$speex_includes"
+  elif test "x$speex_prefix" != "x" ; then
+    SPEEX_CFLAGS="-I$speex_prefix/include"
+  elif test "x$prefix" != "xNONE"; then
+    SPEEX_CFLAGS="-I$prefix/include"
+  fi
+
+  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Speex" >&5
+$as_echo_n "checking for Speex... " >&6; }
+  no_speex=""
+
+
+  if test "x$enable_speextest" = "xyes" ; then
+    ac_save_CFLAGS="$CFLAGS"
+    ac_save_LIBS="$LIBS"
+    CFLAGS="$CFLAGS $SPEEX_CFLAGS"
+    LIBS="$LIBS $SPEEX_LIBS"
+      rm -f conf.speextest
+      if test "$cross_compiling" = yes; then :
+  echo $ac_n "cross compiling; assumed OK... $ac_c"
+else
+  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <speex/speex.h>
+
+int main ()
+{
+  system("touch conf.speextest");
+  return 0;
+}
+
+
+_ACEOF
+if ac_fn_c_try_run "$LINENO"; then :
+
+else
+  no_speex=yes
+fi
+rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
+  conftest.$ac_objext conftest.beam conftest.$ac_ext
+fi
+
+       CFLAGS="$ac_save_CFLAGS"
+       LIBS="$ac_save_LIBS"
+  fi
+
+  if test "x$no_speex" = "x" ; then
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+     :
+  else
+     { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+     if test -f conf.speextest ; then
+       :
+     else
+       echo "*** Could not run Speex test program, checking why..."
+       CFLAGS="$CFLAGS $SPEEX_CFLAGS"
+       LIBS="$LIBS $SPEEX_LIBS"
+       cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+#include <stdio.h>
+#include <speex/speex.h>
+
+int
+main ()
+{
+ return 0;
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+   echo "*** The test program compiled, but did not run. This usually means"
+       echo "*** that the run-time linker is not finding Speex or finding the wrong"
+       echo "*** version of Speex. If it is not finding Speex, you'll need to set your"
+       echo "*** LD_LIBRARY_PATH environment variable, or edit /etc/ld.so.conf to point"
+       echo "*** to the installed location  Also, make sure you have run ldconfig if that"
+       echo "*** is required on your system"
+       echo "***"
+       echo "*** If you have an old version installed, it is best to remove it, although"
+       echo "*** you may also be able to get things to work by modifying LD_LIBRARY_PATH"
+else
+   echo "*** The test program failed to compile or link. See the file config.log for the"
+       echo "*** exact error that occured. This usually means Speex was incorrectly installed"
+       echo "*** or that you have moved Speex since it was installed."
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+       CFLAGS="$ac_save_CFLAGS"
+       LIBS="$ac_save_LIBS"
+     fi
+     SPEEX_CFLAGS=""
+     SPEEX_LIBS=""
+     :
+  fi
+
+
+  rm -f conf.speextest
 
 
 # Check whether --enable-physfs was given.

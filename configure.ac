@@ -301,6 +301,8 @@ if test x$enable_speex = xyes; then
   fi
 fi
 
+dnl Use the official speex macro to compare results from above block
+XIPH_PATH_SPEEX
 
 dnl Check for PhysicsFS http://icculus.org/physfs/
 AC_ARG_ENABLE([physfs],

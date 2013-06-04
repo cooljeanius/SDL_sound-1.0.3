@@ -889,6 +889,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				GENERATE_PROFILING_CODE = YES;
 				HEADER_SEARCH_PATHS = (
+					./mikmod/include,
+					./vorbis/include,
 					/opt/local/include/SDL,
 					/opt/local/include,
 				);
