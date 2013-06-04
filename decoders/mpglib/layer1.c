@@ -10,6 +10,7 @@
 
 #include "mpg123_sdlsound.h"
 
+void I_step_one(unsigned int balloc[], unsigned int scale_index[2][SBLIMIT],struct frame *fr);
 void I_step_one(unsigned int balloc[], unsigned int scale_index[2][SBLIMIT],struct frame *fr)
 {
   unsigned int *ba=balloc;
@@ -50,6 +51,8 @@ void I_step_one(unsigned int balloc[], unsigned int scale_index[2][SBLIMIT],stru
   }
 }
 
+void I_step_two(real fraction[2][SBLIMIT],unsigned int balloc[2*SBLIMIT],
+				unsigned int scale_index[2][SBLIMIT],struct frame *fr);
 void I_step_two(real fraction[2][SBLIMIT],unsigned int balloc[2*SBLIMIT],
 	unsigned int scale_index[2][SBLIMIT],struct frame *fr)
 {

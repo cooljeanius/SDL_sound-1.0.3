@@ -306,6 +306,7 @@ static void deinit_archive(void)
 static volatile int done_flag = 0;
 
 #if HAVE_SIGNAL_H
+void sigint_catcher(int signum);
 void sigint_catcher(int signum)
 {
     static Uint32 last_sigint = 0;

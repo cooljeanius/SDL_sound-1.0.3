@@ -898,6 +898,7 @@
 				LIBRARY_SEARCH_PATHS = /opt/local/lib;
 				RUN_CLANG_STATIC_ANALYZER = YES;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
+				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/vorbis/include\" \"$(SRCROOT)/mikmod/include\" \"$(SRCROOT)/../CWproject/include\" \"$(SRCROOT)/../CWproject/include/SDL\"";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

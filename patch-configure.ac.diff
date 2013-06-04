@@ -1,5 +1,5 @@
 --- configure.in	2008-04-20 16:33:43.000000000 -0400
-+++ configure.ac	2013-06-04 10:08:35.000000000 -0400
++++ configure.ac	2013-06-04 13:07:52.000000000 -0400
 @@ -1,5 +1,9 @@
 +#                                               -*- Autoconf -*-
  # Process this file with autoconf to produce a configure script.
@@ -30,7 +30,7 @@
  
  # libtool versioning
  LT_RELEASE=$MAJOR_VERSION.$MINOR_VERSION
-@@ -43,17 +47,20 @@
+@@ -43,17 +47,21 @@
  AC_CANONICAL_TARGET
  
  dnl Setup for automake
@@ -46,6 +46,7 @@
  dnl Compilers and other tools
  dnl ---------------------------------------------------------------------
  
++AM_PROG_AR
  AC_PROG_CC
 +AC_PROG_CXX
  AC_PROG_INSTALL
@@ -54,7 +55,7 @@
  AM_PROG_LIBTOOL
  
  
-@@ -61,20 +68,19 @@
+@@ -61,20 +69,19 @@
  dnl Debug mode?
  dnl ---------------------------------------------------------------------
  
@@ -80,7 +81,7 @@
  fi
  
  
-@@ -84,147 +90,156 @@
+@@ -84,147 +91,156 @@
  
  dnl Check for SDL
  SDL_VERSION=1.2.0
@@ -293,7 +294,7 @@
    have_vorbis=no
    if test x$have_ogg = xyes; then
      if test x$have_vorbis_hdr = xyes -a x$have_vorbis_lib = xyes; then
-@@ -237,10 +252,12 @@
+@@ -237,10 +253,12 @@
    if test x$have_vorbis = xyes; then
      CFLAGS="$CFLAGS"
      LIBS="$LIBS -logg -lvorbis -lvorbisfile"
@@ -307,7 +308,7 @@
  
  dnl Note that we intentionally look for a symbol in FLAC 1.0.4, since the
  dnl  FLAC developers tend to break their API with every release, so we're
-@@ -250,34 +267,34 @@
+@@ -250,48 +268,50 @@
  dnl   libFLAC supports Ogg FLAC (no more libOggFLAC) so we also need -logg
  dnl   the libFLAC .so version is also #defined in FLAC/export.h
  
@@ -354,8 +355,11 @@
    if test "x$have_ogg_hdr" = "xyes" -a "x$have_ogg_lib" = "xyes" -a "x$have_speex_hdr" = "xyes" -a "x$have_speex_lib" = "xyes"; then
      LIBS="$LIBS -logg -lspeex"
      AC_DEFINE(SOUND_SUPPORTS_SPEEX, 1, [Define if SPEEX support is desired.])
-@@ -286,12 +303,12 @@
+   fi
+ fi
  
++dnl Use the official speex macro to compare results from above block
++XIPH_PATH_SPEEX
  
  dnl Check for PhysicsFS http://icculus.org/physfs/
 -AC_ARG_ENABLE(physfs,
@@ -371,7 +375,7 @@
    if test x$have_physfs_hdr = xyes -a x$have_physfs_lib = xyes; then
      enable_physfs="yes"
    else
-@@ -299,49 +316,54 @@
+@@ -299,49 +319,54 @@
    fi
  fi
  

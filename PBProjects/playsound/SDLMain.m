@@ -99,6 +99,7 @@ static BOOL   gFinderLaunch;
 
 #else
 
+void setupAppleMenu(void);
 void setupAppleMenu(void)
 {
     /* warning: this code is very odd */
@@ -125,6 +126,7 @@ void setupAppleMenu(void)
 }
 
 /* Create a window menu */
+void setupWindowMenu(void);
 void setupWindowMenu(void)
 {
     NSMenu		*windowMenu;
@@ -153,6 +155,7 @@ void setupWindowMenu(void)
 }
 
 /* Replacement for NSApplicationMain */
+void CustomApplicationMain (argc, argv);
 void CustomApplicationMain (argc, argv)
 {
     NSAutoreleasePool	*pool = [[NSAutoreleasePool alloc] init];

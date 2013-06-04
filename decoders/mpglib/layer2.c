@@ -56,7 +56,7 @@ void init_layer2(void)
   }
 }
 
-
+void II_step_one(unsigned int *bit_alloc,int *scale,struct frame *fr);
 void II_step_one(unsigned int *bit_alloc,int *scale,struct frame *fr)
 {
     int stereo = fr->stereo-1;
@@ -130,6 +130,7 @@ void II_step_one(unsigned int *bit_alloc,int *scale,struct frame *fr)
 
 }
 
+void II_step_two(unsigned int *bit_alloc,real fraction[2][4][SBLIMIT],int *scale,struct frame *fr,int x1);
 void II_step_two(unsigned int *bit_alloc,real fraction[2][4][SBLIMIT],int *scale,struct frame *fr,int x1)
 {
     int i,j,k,ba;

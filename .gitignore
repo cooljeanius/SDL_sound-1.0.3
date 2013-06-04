@@ -30,4 +30,5 @@ playsound/playsound_simple
 confdefs.h
 conftest.c
 conftest.err
+*.tar.gz
 
