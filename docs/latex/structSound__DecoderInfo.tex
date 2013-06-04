@@ -1,0 +1,63 @@
+\section{Sound\-\_\-\-Decoder\-Info Struct Reference}
+\label{structSound__DecoderInfo}\index{Sound\-\_\-\-Decoder\-Info@{Sound\-\_\-\-Decoder\-Info}}
+
+
+Information about available soudn decoders.  
+
+
+
+
+{\ttfamily \#include $<$S\-D\-L\-\_\-sound.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+const char $\ast$$\ast$ {\bf extensions}
+\item 
+const char $\ast$ {\bf description}
+\item 
+const char $\ast$ {\bf author}
+\item 
+const char $\ast$ {\bf url}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Information about available soudn decoders. 
+
+Each decoder sets up one of these structs, which can be retrieved via the \doxyref{Sound\-\_\-\-Available\-Decoders()}{p.}{SDL__sound_8h_abbae3fccdec9fad347aa71a29bd4f074} function. E\-V\-E\-R\-Y F\-I\-E\-L\-D I\-N T\-H\-I\-S I\-S R\-E\-A\-D-\/\-O\-N\-L\-Y.
+
+The extensions field is a N\-U\-L\-L-\/terminated list of A\-S\-C\-I\-Z strings. You should read it like this\-:
+
+
+\begin{DoxyCode}
+\textcolor{keyword}{const} \textcolor{keywordtype}{char} **ext;
+\textcolor{keywordflow}{for} (ext = info->extensions; *ext != NULL; ext++) \{
+    printf(\textcolor{stringliteral}{"   File extension \(\backslash\)"%s\(\backslash\)"\(\backslash\)n"}, *ext);
+\}
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Available\-Decoders}{p.}{SDL__sound_8h_abbae3fccdec9fad347aa71a29bd4f074} 
+\end{DoxySeeAlso}
+
+
+\subsection{Field Documentation}
+\index{Sound\-\_\-\-Decoder\-Info@{Sound\-\_\-\-Decoder\-Info}!author@{author}}
+\index{author@{author}!Sound_DecoderInfo@{Sound\-\_\-\-Decoder\-Info}}
+\subsubsection[{author}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Sound\-\_\-\-Decoder\-Info\-::author}\label{structSound__DecoderInfo_a1d3c5d5d46b0f5e5026944002e1d6e36}
+\char`\"{}\-Name Of Author $<$email@emailhost.\-dom$>$\char`\"{} \index{Sound\-\_\-\-Decoder\-Info@{Sound\-\_\-\-Decoder\-Info}!description@{description}}
+\index{description@{description}!Sound_DecoderInfo@{Sound\-\_\-\-Decoder\-Info}}
+\subsubsection[{description}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Sound\-\_\-\-Decoder\-Info\-::description}\label{structSound__DecoderInfo_ac1241b30e4121aedd4286351b27f93d5}
+Human readable description of decoder. \index{Sound\-\_\-\-Decoder\-Info@{Sound\-\_\-\-Decoder\-Info}!extensions@{extensions}}
+\index{extensions@{extensions}!Sound_DecoderInfo@{Sound\-\_\-\-Decoder\-Info}}
+\subsubsection[{extensions}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$$\ast$ Sound\-\_\-\-Decoder\-Info\-::extensions}\label{structSound__DecoderInfo_a9f11db9acb555302fd84509198683e2a}
+File extensions, list ends with N\-U\-L\-L. \index{Sound\-\_\-\-Decoder\-Info@{Sound\-\_\-\-Decoder\-Info}!url@{url}}
+\index{url@{url}!Sound_DecoderInfo@{Sound\-\_\-\-Decoder\-Info}}
+\subsubsection[{url}]{\setlength{\rightskip}{0pt plus 5cm}const char$\ast$ Sound\-\_\-\-Decoder\-Info\-::url}\label{structSound__DecoderInfo_aa983be8195cd74f7dcaab2f4788309fb}
+U\-R\-L specific to this decoder. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+{\bf S\-D\-L\-\_\-sound.\-h}\end{DoxyCompactItemize}

@@ -49,7 +49,8 @@ AC_CANONICAL_TARGET
 dnl Setup for automake
 AC_CONFIG_HEADERS([config.h])
 AM_INIT_AUTOMAKE([foreign])
-
+AC_CONFIG_MACRO_DIR([m4])
+AM_MAINTAINER_MODE
 
 dnl ---------------------------------------------------------------------
 dnl Compilers and other tools
@@ -168,7 +169,10 @@ if test x$enable_smpeg = xyes; then
   fi
 fi
 
-dnl Check for the MIDI decoder...
+dnl Use the official smpeg macro to compare results from above block
+AM_PATH_SMPEG
+
+dnl Check for mpglib
 AC_ARG_ENABLE([mpglib],
 [  --enable-mpglib            enable MP3 decoding internally [default=yes]],
               , [enable_mpglib=yes])
@@ -189,6 +193,9 @@ if test x$enable_mikmod = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_MIKMOD], [1], [Define if MIKMOD support is desired.])
   fi
 fi
+
+dnl Use the official libmikmod macro to compare results from above block
+AM_PATH_LIBMIKMOD
 
 dnl Check for libmodplug
 AC_ARG_ENABLE([modplug],
@@ -219,6 +226,9 @@ if test x$have_ogg_hdr = xyes -a x$have_ogg_lib = xyes; then
   have_ogg=yes
 fi
 
+dnl Use the official ogg macro to compare results from above block
+XIPH_PATH_OGG
+
 dnl !!! FIXME: should be --enable-vorbis.
 dnl ^ OK, fixed (I think) (was originally --enable-ogg)
 dnl Check for Ogg Vorbis
@@ -246,6 +256,8 @@ if test x$enable_vorbis = xyes; then
   fi
 fi
 
+dnl Use the official vorbis macro to compare results from above block
+XIPH_PATH_VORBIS
 
 dnl Note that we intentionally look for a symbol in FLAC 1.0.4, since the
 dnl  FLAC developers tend to break their API with every release, so we're
@@ -314,15 +326,24 @@ fi
 
 # Checks for header files.
 AC_HEADER_STDC
-AC_CHECK_HEADERS([stdlib.h string.h signal.h assert.h])
+AC_PATH_X
+AC_FUNC_ALLOCA
+AC_CHECK_HEADERS([malloc.h stddef.h stdio.h stdlib.h string.h signal.h assert.h])
+AC_CHECK_HEADERS([IOKit/IOKitLib.h IOKit/hidsystem/IOLLEvent.h IOKit/IOTypes.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_C_CONST
+AC_C_INLINE
 AC_CHECK_HEADER_STDBOOL
+AC_TYPE_INT8_T
 AC_TYPE_INT16_T
 AC_TYPE_INT32_T
 AC_TYPE_INT64_T
 AC_TYPE_SIZE_T
+AC_TYPE_UINT8_T
+AC_TYPE_UINT16_T
+AC_TYPE_UINT32_T
+AC_TYPE_UINT64_T
 AC_CHECK_TYPES([ptrdiff_t])
 
 # Checks for library functions.

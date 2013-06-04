@@ -1,0 +1,31 @@
+The latest version of S\-D\-L\-\_\-sound can be found at\-: {\tt http\-://icculus.\-org/\-S\-D\-L\-\_\-sound/}
+
+The basic gist of S\-D\-L\-\_\-sound is that you use an S\-D\-L\-\_\-\-R\-Wops to get sound data into this library, and S\-D\-L\-\_\-sound will take that data, in one of several popular formats, and decode it into raw waveform data in the format of your choice. This gives you a nice abstraction for getting sound into your game or application; just feed it to S\-D\-L\-\_\-sound, and it will handle decoding and converting, so you can just pass it to your S\-D\-L audio callback (or whatever). Since it gets data from an S\-D\-L\-\_\-\-R\-Wops, you can get the initial sound data from any number of sources\-: file, memory buffer, network connection, etc.
+
+As the name implies, this library depends on S\-D\-L\-: Simple Directmedia Layer, which is a powerful, free, and cross-\/platform multimedia library. It can be found at {\tt http\-://www.\-libsdl.\-org/}
+
+Support is in place or planned for the following sound formats\-:
+\begin{DoxyItemize}
+\item .W\-A\-V (Microsoft W\-A\-Vfile R\-I\-F\-F data, internal.)
+\item .V\-O\-C (Creative Labs' Voice format, internal.)
+\item .M\-P3 (M\-P\-E\-G-\/1 Layer 3 support, via the S\-M\-P\-E\-G and mpglib libraries.)
+\item .M\-I\-D (M\-I\-D\-I music converted to Waveform data, internal.)
+\item .M\-O\-D (M\-O\-D files, via Mik\-Mod and Mod\-Plug.)
+\item .O\-G\-G (Ogg files, via Ogg Vorbis libraries.)
+\item .S\-P\-X (Speex files, via libspeex.)
+\item .S\-H\-N (Shorten files, internal.)
+\item .R\-A\-W (Raw sound data in any format, internal.)
+\item .A\-U (Sun's Audio format, internal.)
+\item .A\-I\-F\-F (Audio Interchange format, internal.)
+\item .F\-L\-A\-C (Lossless audio compression, via lib\-F\-L\-A\-C.)
+\end{DoxyItemize}
+
+(...and more to come...)
+
+Please see the file C\-O\-P\-Y\-I\-N\-G in the source's root directory.
+
+\begin{DoxyAuthor}{Author}
+Ryan C. Gordon ({\tt icculus@icculus.\-org}) 
+
+many others, please see C\-R\-E\-D\-I\-T\-S in the source's root directory. 
+\end{DoxyAuthor}

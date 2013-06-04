@@ -85,14 +85,14 @@ static int refcounter_close(SDL_RWops *rw)
     return(retval);
 } /* refcounter_close */
 
-
+void RWops_RWRefCounter_addRef(SDL_RWops *rw);
 void RWops_RWRefCounter_addRef(SDL_RWops *rw)
 {
     RWRefCounterData *data = (RWRefCounterData *) rw->hidden.unknown.data1;
     data->refcount++;
 } /* RWops_RWRefCounter_addRef */
 
-
+SDL_RWops *RWops_RWRefCounter_new(SDL_RWops *rw);
 SDL_RWops *RWops_RWRefCounter_new(SDL_RWops *rw)
 {
     SDL_RWops *retval = NULL;

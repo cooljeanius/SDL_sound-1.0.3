@@ -1,0 +1,584 @@
+\section{S\-D\-L\-\_\-sound.\-h File Reference}
+\label{SDL__sound_8h}\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}}
+{\ttfamily \#include \char`\"{}S\-D\-L.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\-D\-L\-\_\-endian.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct {\bf Sound\-\_\-\-Audio\-Info}
+\begin{DoxyCompactList}\small\item\em Information about an existing sample's format. \end{DoxyCompactList}\item 
+struct {\bf Sound\-\_\-\-Decoder\-Info}
+\begin{DoxyCompactList}\small\item\em Information about available soudn decoders. \end{DoxyCompactList}\item 
+struct {\bf Sound\-\_\-\-Sample}
+\begin{DoxyCompactList}\small\item\em Represents sound data in the process of being decoded. \end{DoxyCompactList}\item 
+struct {\bf Sound\-\_\-\-Version}
+\begin{DoxyCompactList}\small\item\em Information the version of S\-D\-L\-\_\-sound in use. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define {\bf S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N}(x)
+\begin{DoxyCompactList}\small\item\em Macro to determine S\-D\-L\-\_\-sound version program was compiled against. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bf Sound\-\_\-\-Sample\-Flags} \{ \\*
+{\bf S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-N\-O\-N\-E} = 0, 
+{\bf S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K} = 1, 
+{\bf S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-O\-F} = 1 $<$$<$ 29, 
+{\bf S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R} = 1 $<$$<$ 30, 
+\\*
+{\bf S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-A\-G\-A\-I\-N} = 1 $<$$<$ 31
+ \}
+\begin{DoxyCompactList}\small\item\em Flags that are used in a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} to show various states. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bf Sound\-\_\-\-Get\-Linked\-Version} ({\bf Sound\-\_\-\-Version} $\ast$ver)
+\begin{DoxyCompactList}\small\item\em Get the version of S\-D\-L\-\_\-sound that is linked against your program. \end{DoxyCompactList}\item 
+int {\bf Sound\-\_\-\-Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize S\-D\-L\-\_\-sound. \end{DoxyCompactList}\item 
+int {\bf Sound\-\_\-\-Quit} (void)
+\begin{DoxyCompactList}\small\item\em Shutdown S\-D\-L\-\_\-sound. \end{DoxyCompactList}\item 
+const {\bf Sound\-\_\-\-Decoder\-Info} $\ast$$\ast$ {\bf Sound\-\_\-\-Available\-Decoders} (void)
+\begin{DoxyCompactList}\small\item\em Get a list of sound formats supported by this version of S\-D\-L\-\_\-sound. \end{DoxyCompactList}\item 
+const char $\ast$ {\bf Sound\-\_\-\-Get\-Error} (void)
+\begin{DoxyCompactList}\small\item\em Get the last S\-D\-L\-\_\-sound error message as a null-\/terminated string. \end{DoxyCompactList}\item 
+void {\bf Sound\-\_\-\-Clear\-Error} (void)
+\begin{DoxyCompactList}\small\item\em Clear the current error message. \end{DoxyCompactList}\item 
+{\bf Sound\-\_\-\-Sample} $\ast$ {\bf Sound\-\_\-\-New\-Sample} (S\-D\-L\-\_\-\-R\-Wops $\ast$rw, const char $\ast$ext, {\bf Sound\-\_\-\-Audio\-Info} $\ast$desired, Uint32 buffer\-Size)
+\begin{DoxyCompactList}\small\item\em Start decoding a new sound sample. \end{DoxyCompactList}\item 
+{\bf Sound\-\_\-\-Sample} $\ast$ {\bf Sound\-\_\-\-New\-Sample\-From\-File} (const char $\ast$fname, {\bf Sound\-\_\-\-Audio\-Info} $\ast$desired, Uint32 buffer\-Size)
+\begin{DoxyCompactList}\small\item\em Start decoding a new sound sample from a file on disk. \end{DoxyCompactList}\item 
+void {\bf Sound\-\_\-\-Free\-Sample} ({\bf Sound\-\_\-\-Sample} $\ast$sample)
+\begin{DoxyCompactList}\small\item\em Dispose of a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. \end{DoxyCompactList}\item 
+int {\bf Sound\-\_\-\-Set\-Buffer\-Size} ({\bf Sound\-\_\-\-Sample} $\ast$sample, Uint32 new\-\_\-size)
+\begin{DoxyCompactList}\small\item\em Change the current buffer size for a sample. \end{DoxyCompactList}\item 
+Uint32 {\bf Sound\-\_\-\-Decode} ({\bf Sound\-\_\-\-Sample} $\ast$sample)
+\begin{DoxyCompactList}\small\item\em Decode more of the sound data in a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. \end{DoxyCompactList}\item 
+Uint32 {\bf Sound\-\_\-\-Decode\-All} ({\bf Sound\-\_\-\-Sample} $\ast$sample)
+\begin{DoxyCompactList}\small\item\em Decode the remainder of the sound data in a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. \end{DoxyCompactList}\item 
+int {\bf Sound\-\_\-\-Rewind} ({\bf Sound\-\_\-\-Sample} $\ast$sample)
+\begin{DoxyCompactList}\small\item\em Rewind a sample to the start. \end{DoxyCompactList}\item 
+int {\bf Sound\-\_\-\-Seek} ({\bf Sound\-\_\-\-Sample} $\ast$sample, Uint32 ms)
+\begin{DoxyCompactList}\small\item\em Seek to a different point in a sample. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Macro Definition Documentation}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N@{S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N}}
+\index{S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N@{S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N}]{\setlength{\rightskip}{0pt plus 5cm}\#define S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N(
+\begin{DoxyParamCaption}
+\item[{}]{x}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a059b1c022acec0abbdab4a981b6e8e7d}
+{\bfseries Value\-:}
+\begin{DoxyCode}
+\{ \(\backslash\)
+    (x)->major = SOUND\_VER\_MAJOR; \(\backslash\)
+    (x)->minor = SOUND\_VER\_MINOR; \(\backslash\)
+    (x)->patch = SOUND\_VER\_PATCH; \(\backslash\)
+\}
+\end{DoxyCode}
+
+
+Macro to determine S\-D\-L\-\_\-sound version program was compiled against. 
+
+This macro fills in a \doxyref{Sound\-\_\-\-Version}{p.}{structSound__Version} structure with the version of the library you compiled against. This is determined by what header the compiler uses. Note that if you dynamically linked the library, you might have a slightly newer or older version at runtime. That version can be determined with \doxyref{Sound\-\_\-\-Get\-Linked\-Version()}{p.}{SDL__sound_8h_abda6027ae5b226e626a9e1ea1f6e626c}, which, unlike S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N, is not a macro.
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & A pointer to a \doxyref{Sound\-\_\-\-Version}{p.}{structSound__Version} struct to initialize.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Version}{p.}{structSound__Version} 
+
+\doxyref{Sound\-\_\-\-Get\-Linked\-Version}{p.}{SDL__sound_8h_abda6027ae5b226e626a9e1ea1f6e626c} 
+\end{DoxySeeAlso}
+
+
+\subsection{Enumeration Type Documentation}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Sample\-Flags@{Sound\-\_\-\-Sample\-Flags}}
+\index{Sound\-\_\-\-Sample\-Flags@{Sound\-\_\-\-Sample\-Flags}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Sample\-Flags}]{\setlength{\rightskip}{0pt plus 5cm}enum {\bf Sound\-\_\-\-Sample\-Flags}}\label{SDL__sound_8h_abf2c8cef39e83f01531f0bf255bdc625}
+
+
+Flags that are used in a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} to show various states. 
+
+To use\-: 
+\begin{DoxyCode}
+\textcolor{keywordflow}{if} (sample->flags & SOUND_SAMPLEFLAG_ERROR) \{ dosomething(); \}
+\end{DoxyCode}
+
+
+\begin{DoxySeeAlso}{See Also}
+Sound\-\_\-\-Sample\-New 
+
+Sound\-\_\-\-Sample\-New\-From\-File 
+
+Sound\-\_\-\-Sample\-Decode 
+
+Sound\-\_\-\-Sample\-Decode\-All 
+
+Sound\-\_\-\-Sample\-Seek 
+\end{DoxySeeAlso}
+\begin{Desc}
+\item[Enumerator]\par
+\begin{description}
+\index{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-N\-O\-N\-E@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-N\-O\-N\-E}!S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}}\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-N\-O\-N\-E@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-N\-O\-N\-E}}\item[{\em 
+S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-N\-O\-N\-E\label{SDL__sound_8h_abf2c8cef39e83f01531f0bf255bdc625a192a6518e94eabf9cd5c45babc9635ee}
+}]No special attributes. \index{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K}!S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}}\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K}}\item[{\em 
+S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K\label{SDL__sound_8h_abf2c8cef39e83f01531f0bf255bdc625a334d72e6e376dae44baa66746398bbaa}
+}]Sample can seek to arbitrary points. \index{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-O\-F@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-O\-F}!S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}}\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-O\-F@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-O\-F}}\item[{\em 
+S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-O\-F\label{SDL__sound_8h_abf2c8cef39e83f01531f0bf255bdc625ae0b562eebb0bf6cdf3da87eb1b4914be}
+}]End of input stream. \index{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R}!S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}}\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R}}\item[{\em 
+S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R\label{SDL__sound_8h_abf2c8cef39e83f01531f0bf255bdc625a5d6c02e3276932f2217ee09a51eed65f}
+}]Unrecoverable error. \index{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-A\-G\-A\-I\-N@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-A\-G\-A\-I\-N}!S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}}\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-A\-G\-A\-I\-N@{S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-A\-G\-A\-I\-N}}\item[{\em 
+S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-A\-G\-A\-I\-N\label{SDL__sound_8h_abf2c8cef39e83f01531f0bf255bdc625ab269a22d877556f5569dc737ad984e1a}
+}]Function would block, or temp error. \end{description}
+\end{Desc}
+
+
+\subsection{Function Documentation}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Available\-Decoders@{Sound\-\_\-\-Available\-Decoders}}
+\index{Sound\-\_\-\-Available\-Decoders@{Sound\-\_\-\-Available\-Decoders}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Available\-Decoders}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf Sound\-\_\-\-Decoder\-Info} $\ast$$\ast$ Sound\-\_\-\-Available\-Decoders (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_abbae3fccdec9fad347aa71a29bd4f074}
+
+
+Get a list of sound formats supported by this version of S\-D\-L\-\_\-sound. 
+
+This is for informational purposes only. Note that the extension listed is merely convention\-: if we list \char`\"{}\-M\-P3\char`\"{}, you can open an M\-P\-E\-G-\/1 Layer 3 audio file with an extension of \char`\"{}\-X\-Y\-Z\char`\"{}, if you like. The file extensions are informational, and only required as a hint to choosing the correct decoder, since the sound data may not be coming from a file at all, thanks to the abstraction that an S\-D\-L\-\_\-\-R\-Wops provides.
+
+The returned value is an array of pointers to \doxyref{Sound\-\_\-\-Decoder\-Info}{p.}{structSound__DecoderInfo} structures, with a N\-U\-L\-L entry to signify the end of the list\-:
+
+
+\begin{DoxyCode}
+Sound_DecoderInfo **i;
+
+\textcolor{keywordflow}{for} (i = Sound_AvailableDecoders(); *i != NULL; i++)
+\{
+    printf(\textcolor{stringliteral}{"Supported sound format: [%s], which is [%s].\(\backslash\)n"},
+             i->extension, i->description);
+    \textcolor{comment}{// ...and other fields...}
+\}
+\end{DoxyCode}
+
+
+The return values are pointers to static internal memory, and should be considered R\-E\-A\-D O\-N\-L\-Y, and never freed.
+
+\begin{DoxyReturn}{Returns}
+R\-E\-A\-D O\-N\-L\-Y Null-\/terminated array of R\-E\-A\-D O\-N\-L\-Y structures.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Decoder\-Info}{p.}{structSound__DecoderInfo} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Clear\-Error@{Sound\-\_\-\-Clear\-Error}}
+\index{Sound\-\_\-\-Clear\-Error@{Sound\-\_\-\-Clear\-Error}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Clear\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\-\_\-\-Clear\-Error (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a7c0a82fc646c5b819b8d0e81bea029fb}
+
+
+Clear the current error message. 
+
+The next call to \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061} after \doxyref{Sound\-\_\-\-Clear\-Error()}{p.}{SDL__sound_8h_a7c0a82fc646c5b819b8d0e81bea029fb} will return N\-U\-L\-L.
+
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Get\-Error}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Decode@{Sound\-\_\-\-Decode}}
+\index{Sound\-\_\-\-Decode@{Sound\-\_\-\-Decode}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Decode}]{\setlength{\rightskip}{0pt plus 5cm}Uint32 Sound\-\_\-\-Decode (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Sample} $\ast$}]{sample}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a6dbdf33dc4bc6b832fec2f4ffe5d546e}
+
+
+Decode more of the sound data in a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. 
+
+It will decode at most sample-\/$>$buffer\-\_\-size bytes into sample-\/$>$buffer in the desired format, and return the number of decoded bytes. If sample-\/$>$buffer\-\_\-size bytes could not be decoded, then please refer to sample-\/$>$flags to determine if this was an end-\/of-\/stream or error condition.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & Do more decoding to this \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of bytes decoded into sample-\/$>$buffer. If it is less than sample-\/$>$buffer\-\_\-size, then you should check sample-\/$>$flags to see what the current state of the sample is (E\-O\-F, error, read again).
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Decode\-All}{p.}{SDL__sound_8h_a07f8d77bb5449be3707625f58de1aba7} 
+
+\doxyref{Sound\-\_\-\-Set\-Buffer\-Size}{p.}{SDL__sound_8h_ac09076aa2bdc14d08130e25a6915279d} 
+
+\doxyref{Sound\-\_\-\-Seek}{p.}{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b} 
+
+\doxyref{Sound\-\_\-\-Rewind}{p.}{SDL__sound_8h_a720f92a75c0340c879c945ec3e9fdf70} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Decode\-All@{Sound\-\_\-\-Decode\-All}}
+\index{Sound\-\_\-\-Decode\-All@{Sound\-\_\-\-Decode\-All}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Decode\-All}]{\setlength{\rightskip}{0pt plus 5cm}Uint32 Sound\-\_\-\-Decode\-All (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Sample} $\ast$}]{sample}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a07f8d77bb5449be3707625f58de1aba7}
+
+
+Decode the remainder of the sound data in a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. 
+
+This will dynamically allocate memory for the E\-N\-T\-I\-R\-E remaining sample. sample-\/$>$buffer\-\_\-size and sample-\/$>$buffer will be updated to reflect the new buffer. Please refer to sample-\/$>$flags to determine if the decoding finished due to an End-\/of-\/stream or error condition.
+
+Be aware that sound data can take a large amount of memory, and that this function may block for quite awhile while processing. Also note that a streaming source (for example, from a S\-D\-L\-\_\-\-R\-Wops that is getting fed from an Internet radio feed that doesn't end) may fill all available memory before giving up...be sure to use this on finite sound sources only!
+
+When decoding the sample in its entirety, the work is done one buffer at a time. That is, sound is decoded in sample-\/$>$buffer\-\_\-size blocks, and appended to a continually-\/growing buffer until the decoding completes. That means that this function will need enough R\-A\-M to hold approximately sample-\/$>$buffer\-\_\-size bytes plus the complete decoded sample at most. The larger your buffer size, the less overhead this function needs, but beware the possibility of paging to disk. Best to make this user-\/configurable if the sample isn't specific and small.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & Do all decoding for this \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+number of bytes decoded into sample-\/$>$buffer. You should check sample-\/$>$flags to see what the current state of the sample is (E\-O\-F, error, read again).
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Decode}{p.}{SDL__sound_8h_a6dbdf33dc4bc6b832fec2f4ffe5d546e} 
+
+\doxyref{Sound\-\_\-\-Set\-Buffer\-Size}{p.}{SDL__sound_8h_ac09076aa2bdc14d08130e25a6915279d} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Free\-Sample@{Sound\-\_\-\-Free\-Sample}}
+\index{Sound\-\_\-\-Free\-Sample@{Sound\-\_\-\-Free\-Sample}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Free\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\-\_\-\-Free\-Sample (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Sample} $\ast$}]{sample}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a7f16cbb883e57b772bae0507ac4d5488}
+
+
+Dispose of a \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample}. 
+
+This will also close/dispose of the S\-D\-L\-\_\-\-R\-Wops that was used at creation time, so there's no need to keep a reference to that around. The \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} pointer is invalid after this call, and will almost certainly result in a crash if you attempt to keep using it.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & The \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} to delete.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-New\-Sample}{p.}{SDL__sound_8h_a10b9c44cc1cc2ff8a93977b43870cb53} 
+
+\doxyref{Sound\-\_\-\-New\-Sample\-From\-File}{p.}{SDL__sound_8h_a0869896a4bb39ee002257aa1cb3c39ec} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Get\-Error@{Sound\-\_\-\-Get\-Error}}
+\index{Sound\-\_\-\-Get\-Error@{Sound\-\_\-\-Get\-Error}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Get\-Error}]{\setlength{\rightskip}{0pt plus 5cm}const char $\ast$ Sound\-\_\-\-Get\-Error (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061}
+
+
+Get the last S\-D\-L\-\_\-sound error message as a null-\/terminated string. 
+
+This will be N\-U\-L\-L if there's been no error since the last call to this function. The pointer returned by this call points to an internal buffer, and should not be deallocated. Each thread has a unique error state associated with it, but each time a new error message is set, it will overwrite the previous one associated with that thread. It is safe to call this function at anytime, even before \doxyref{Sound\-\_\-\-Init()}{p.}{SDL__sound_8h_a44e4cafdb81fc9f9135796bcfd3fb44f}.
+
+\begin{DoxyReturn}{Returns}
+R\-E\-A\-D O\-N\-L\-Y string of last error message.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Clear\-Error}{p.}{SDL__sound_8h_a7c0a82fc646c5b819b8d0e81bea029fb} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Get\-Linked\-Version@{Sound\-\_\-\-Get\-Linked\-Version}}
+\index{Sound\-\_\-\-Get\-Linked\-Version@{Sound\-\_\-\-Get\-Linked\-Version}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Get\-Linked\-Version}]{\setlength{\rightskip}{0pt plus 5cm}void Sound\-\_\-\-Get\-Linked\-Version (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Version} $\ast$}]{ver}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_abda6027ae5b226e626a9e1ea1f6e626c}
+
+
+Get the version of S\-D\-L\-\_\-sound that is linked against your program. 
+
+If you are using a shared library (D\-L\-L) version of S\-D\-L\-\_\-sound, then it is possible that it will be different than the version you compiled against.
+
+This is a real function; the macro S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N tells you what version of S\-D\-L\-\_\-sound you compiled against\-:
+
+
+\begin{DoxyCode}
+Sound_Version compiled;
+Sound_Version linked;
+
+SOUND_VERSION(&compiled);
+Sound_GetLinkedVersion(&linked);
+printf(\textcolor{stringliteral}{"We compiled against SDL\_sound version %d.%d.%d ...\(\backslash\)n"},
+          compiled.major, compiled.minor, compiled.patch);
+printf(\textcolor{stringliteral}{"But we linked against SDL\_sound version %d.%d.%d.\(\backslash\)n"},
+          linked.major, linked.minor, linked.patch);
+\end{DoxyCode}
+
+
+This function may be called safely at any time, even before \doxyref{Sound\-\_\-\-Init()}{p.}{SDL__sound_8h_a44e4cafdb81fc9f9135796bcfd3fb44f}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em ver} & \doxyref{Sound\-\_\-\-Version}{p.}{structSound__Version} structure to fill with shared library's version.\\
+\hline
+\end{DoxyParams}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Version}{p.}{structSound__Version} 
+
+\doxyref{S\-O\-U\-N\-D\-\_\-\-V\-E\-R\-S\-I\-O\-N}{p.}{SDL__sound_8h_a059b1c022acec0abbdab4a981b6e8e7d} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Init@{Sound\-\_\-\-Init}}
+\index{Sound\-\_\-\-Init@{Sound\-\_\-\-Init}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Init}]{\setlength{\rightskip}{0pt plus 5cm}Sound\-\_\-\-Init (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a44e4cafdb81fc9f9135796bcfd3fb44f}
+
+
+Initialize S\-D\-L\-\_\-sound. 
+
+This must be called before any other S\-D\-L\-\_\-sound function (except perhaps \doxyref{Sound\-\_\-\-Get\-Linked\-Version()}{p.}{SDL__sound_8h_abda6027ae5b226e626a9e1ea1f6e626c}). You should call S\-D\-L\-\_\-\-Init() before calling this. \doxyref{Sound\-\_\-\-Init()}{p.}{SDL__sound_8h_a44e4cafdb81fc9f9135796bcfd3fb44f} will attempt to call S\-D\-L\-\_\-\-Init(\-S\-D\-L\-\_\-\-I\-N\-I\-T\-\_\-\-A\-U\-D\-I\-O), just in case. This is a safe behaviour, but it may not configure S\-D\-L to your liking by itself.
+
+\begin{DoxyReturn}{Returns}
+nonzero on success, zero on error. Specifics of the error can be gleaned from \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061}.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Quit}{p.}{SDL__sound_8h_a94408f49764dc122b0fad0397dccc941} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-New\-Sample@{Sound\-\_\-\-New\-Sample}}
+\index{Sound\-\_\-\-New\-Sample@{Sound\-\_\-\-New\-Sample}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-New\-Sample}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-\_\-\-Sample} $\ast$ Sound\-\_\-\-New\-Sample (
+\begin{DoxyParamCaption}
+\item[{S\-D\-L\-\_\-\-R\-Wops $\ast$}]{rw, }
+\item[{const char $\ast$}]{ext, }
+\item[{{\bf Sound\-\_\-\-Audio\-Info} $\ast$}]{desired, }
+\item[{Uint32}]{buffer\-Size}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a10b9c44cc1cc2ff8a93977b43870cb53}
+
+
+Start decoding a new sound sample. 
+
+The data is read via an S\-D\-L\-\_\-\-R\-Wops structure (see S\-D\-L\-\_\-rwops.\-h in the S\-D\-L include directory), so it may be coming from memory, disk, network stream, etc. The (ext) parameter is merely a hint to determining the correct decoder; if you specify, for example, \char`\"{}mp3\char`\"{} for an extension, and one of the decoders lists that as a handled extension, then that decoder is given first shot at trying to claim the data for decoding. If none of the extensions match (or the extension is N\-U\-L\-L), then every decoder examines the data to determine if it can handle it, until one accepts it. In such a case your S\-D\-L\-\_\-\-R\-Wops will need to be capable of rewinding to the start of the stream.
+
+If no decoders can handle the data, a N\-U\-L\-L value is returned, and a human readable error message can be fetched from \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061}.
+
+Optionally, a desired audio format can be specified. If the incoming data is in a different format, S\-D\-L\-\_\-sound will convert it to the desired format on the fly. Note that this can be an expensive operation, so it may be wise to convert data before you need to play it back, if possible, or make sure your data is initially in the format that you need it in. If you don't want to convert the data, you can specify N\-U\-L\-L for a desired format. The incoming format of the data, preconversion, can be found in the \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} structure.
+
+Note that the raw sound data \char`\"{}decoder\char`\"{} needs you to specify both the extension \char`\"{}\-R\-A\-W\char`\"{} and a \char`\"{}desired\char`\"{} format, or it will refuse to handle the data. This is to prevent it from catching all formats unsupported by the other decoders.
+
+Finally, specify an initial buffer size; this is the number of bytes that will be allocated to store each read from the sound buffer. The more you can safely allocate, the more decoding can be done in one block, but the more resources you have to use up, and the longer each decoding call will take. Note that different data formats require more or less space to store. This buffer can be resized via \doxyref{Sound\-\_\-\-Set\-Buffer\-Size()}{p.}{SDL__sound_8h_ac09076aa2bdc14d08130e25a6915279d} ...
+
+The buffer size specified must be a multiple of the size of a single sample point. So, if you want 16-\/bit, stereo samples, then your sample point size is (2 channels $\ast$ 16 bits), or 32 bits per sample, which is four bytes. In such a case, you could specify 128 or 132 bytes for a buffer, but not 129, 130, or 131 (although in reality, you'll want to specify a M\-U\-C\-H larger buffer).
+
+When you are done with this \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} pointer, you can dispose of it via \doxyref{Sound\-\_\-\-Free\-Sample()}{p.}{SDL__sound_8h_a7f16cbb883e57b772bae0507ac4d5488}.
+
+You do not have to keep a reference to (rw) around. If this function suceeds, it stores (rw) internally (and disposes of it during the call to \doxyref{Sound\-\_\-\-Free\-Sample()}{p.}{SDL__sound_8h_a7f16cbb883e57b772bae0507ac4d5488}). If this function fails, it will dispose of the S\-D\-L\-\_\-\-R\-Wops for you.
+
+
+\begin{DoxyParams}{Parameters}
+{\em rw} & S\-D\-L\-\_\-\-R\-Wops with sound data. \\
+\hline
+{\em ext} & File extension normally associated with a data format. Can usually be N\-U\-L\-L. \\
+\hline
+{\em desired} & Format to convert sound data into. Can usually be N\-U\-L\-L, if you don't need conversion. \\
+\hline
+{\em buffer\-Size} & Size, in bytes, to allocate for the decoding buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} pointer, which is used as a handle to several other S\-D\-L\-\_\-sound A\-P\-Is. N\-U\-L\-L on error. If error, use \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061} to see what went wrong.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-New\-Sample\-From\-File}{p.}{SDL__sound_8h_a0869896a4bb39ee002257aa1cb3c39ec} 
+
+\doxyref{Sound\-\_\-\-Set\-Buffer\-Size}{p.}{SDL__sound_8h_ac09076aa2bdc14d08130e25a6915279d} 
+
+\doxyref{Sound\-\_\-\-Decode}{p.}{SDL__sound_8h_a6dbdf33dc4bc6b832fec2f4ffe5d546e} 
+
+\doxyref{Sound\-\_\-\-Decode\-All}{p.}{SDL__sound_8h_a07f8d77bb5449be3707625f58de1aba7} 
+
+\doxyref{Sound\-\_\-\-Seek}{p.}{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b} 
+
+\doxyref{Sound\-\_\-\-Rewind}{p.}{SDL__sound_8h_a720f92a75c0340c879c945ec3e9fdf70} 
+
+\doxyref{Sound\-\_\-\-Free\-Sample}{p.}{SDL__sound_8h_a7f16cbb883e57b772bae0507ac4d5488} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-New\-Sample\-From\-File@{Sound\-\_\-\-New\-Sample\-From\-File}}
+\index{Sound\-\_\-\-New\-Sample\-From\-File@{Sound\-\_\-\-New\-Sample\-From\-File}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-New\-Sample\-From\-File}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Sound\-\_\-\-Sample} $\ast$ Sound\-\_\-\-New\-Sample\-From\-File (
+\begin{DoxyParamCaption}
+\item[{const char $\ast$}]{filename, }
+\item[{{\bf Sound\-\_\-\-Audio\-Info} $\ast$}]{desired, }
+\item[{Uint32}]{buffer\-Size}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a0869896a4bb39ee002257aa1cb3c39ec}
+
+
+Start decoding a new sound sample from a file on disk. 
+
+This is identical to \doxyref{Sound\-\_\-\-New\-Sample()}{p.}{SDL__sound_8h_a10b9c44cc1cc2ff8a93977b43870cb53}, but it creates an S\-D\-L\-\_\-\-R\-Wops for you from the file located in (filename). Note that (filename) is specified in platform-\/dependent notation. (\char`\"{}\-C\-:\textbackslash{}\textbackslash{}music\textbackslash{}\textbackslash{}mysong.\-mp3\char`\"{} on windows, and \char`\"{}/home/icculus/music/mysong.\-mp3\char`\"{} or whatever on Unix, etc.) \doxyref{Sound\-\_\-\-New\-Sample()}{p.}{SDL__sound_8h_a10b9c44cc1cc2ff8a93977b43870cb53}'s \char`\"{}ext\char`\"{} parameter is gleaned from the contents of (filename).
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & file containing sound data. \\
+\hline
+{\em desired} & Format to convert sound data into. Can usually be N\-U\-L\-L, if you don't need conversion. \\
+\hline
+{\em buffer\-Size} & size, in bytes, of initial read buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} pointer, which is used as a handle to several other S\-D\-L\-\_\-sound A\-P\-Is. N\-U\-L\-L on error. If error, use \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061} to see what went wrong.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-New\-Sample}{p.}{SDL__sound_8h_a10b9c44cc1cc2ff8a93977b43870cb53} 
+
+\doxyref{Sound\-\_\-\-Set\-Buffer\-Size}{p.}{SDL__sound_8h_ac09076aa2bdc14d08130e25a6915279d} 
+
+\doxyref{Sound\-\_\-\-Decode}{p.}{SDL__sound_8h_a6dbdf33dc4bc6b832fec2f4ffe5d546e} 
+
+\doxyref{Sound\-\_\-\-Decode\-All}{p.}{SDL__sound_8h_a07f8d77bb5449be3707625f58de1aba7} 
+
+\doxyref{Sound\-\_\-\-Seek}{p.}{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b} 
+
+\doxyref{Sound\-\_\-\-Rewind}{p.}{SDL__sound_8h_a720f92a75c0340c879c945ec3e9fdf70} 
+
+\doxyref{Sound\-\_\-\-Free\-Sample}{p.}{SDL__sound_8h_a7f16cbb883e57b772bae0507ac4d5488} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Quit@{Sound\-\_\-\-Quit}}
+\index{Sound\-\_\-\-Quit@{Sound\-\_\-\-Quit}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Quit}]{\setlength{\rightskip}{0pt plus 5cm}Sound\-\_\-\-Quit (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a94408f49764dc122b0fad0397dccc941}
+
+
+Shutdown S\-D\-L\-\_\-sound. 
+
+This closes any S\-D\-L\-\_\-\-R\-Wops that were being used as sound sources, and frees any resources in use by S\-D\-L\-\_\-sound.
+
+All \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} pointers you had prior to this call are I\-N\-V\-A\-L\-I\-D\-A\-T\-E\-D.
+
+Once successfully deinitialized, \doxyref{Sound\-\_\-\-Init()}{p.}{SDL__sound_8h_a44e4cafdb81fc9f9135796bcfd3fb44f} can be called again to restart the subsystem. All default A\-P\-I states are restored at this point.
+
+You should call this B\-E\-F\-O\-R\-E S\-D\-L\-\_\-\-Quit(). This will N\-O\-T call S\-D\-L\-\_\-\-Quit() for you!
+
+\begin{DoxyReturn}{Returns}
+nonzero on success, zero on error. Specifics of the error can be gleaned from \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061}. If failure, state of S\-D\-L\-\_\-sound is undefined, and probably badly screwed up.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Init}{p.}{SDL__sound_8h_a44e4cafdb81fc9f9135796bcfd3fb44f} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Rewind@{Sound\-\_\-\-Rewind}}
+\index{Sound\-\_\-\-Rewind@{Sound\-\_\-\-Rewind}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Rewind}]{\setlength{\rightskip}{0pt plus 5cm}int Sound\-\_\-\-Rewind (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Sample} $\ast$}]{sample}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_a720f92a75c0340c879c945ec3e9fdf70}
+
+
+Rewind a sample to the start. 
+
+Restart a sample at the start of its waveform data, as if newly created with \doxyref{Sound\-\_\-\-New\-Sample()}{p.}{SDL__sound_8h_a10b9c44cc1cc2ff8a93977b43870cb53}. If successful, the next call to Sound\-\_\-\-Decode[All]() will give audio data from the earliest point in the stream.
+
+Beware that this function will fail if the S\-D\-L\-\_\-\-R\-Wops that feeds the decoder can not be rewound via it's seek method, but this can theoretically be avoided by wrapping it in some sort of buffering S\-D\-L\-\_\-\-R\-Wops.
+
+This function should O\-N\-L\-Y fail if the R\-Wops is not seekable, or S\-D\-L\-\_\-sound is not initialized. Both can be controlled by the application, and thus, it is up to the developer's paranoia to dictate whether this function's return value need be checked at all.
+
+If this function fails, the state of the sample is undefined, but it is still safe to call \doxyref{Sound\-\_\-\-Free\-Sample()}{p.}{SDL__sound_8h_a7f16cbb883e57b772bae0507ac4d5488} to dispose of it.
+
+On success, E\-R\-R\-O\-R, E\-O\-F, and E\-A\-G\-A\-I\-N are cleared from sample-\/$>$flags. The E\-R\-R\-O\-R flag is set on error.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & The \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} to rewind. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nonzero on success, zero on error. Specifics of the error can be gleaned from \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061}.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Seek}{p.}{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Seek@{Sound\-\_\-\-Seek}}
+\index{Sound\-\_\-\-Seek@{Sound\-\_\-\-Seek}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Seek}]{\setlength{\rightskip}{0pt plus 5cm}int Sound\-\_\-\-Seek (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Sample} $\ast$}]{sample, }
+\item[{Uint32}]{ms}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b}
+
+
+Seek to a different point in a sample. 
+
+Reposition a sample's stream. If successful, the next call to Sound\-\_\-\-Decode[All]() will give audio data from the offset you specified.
+
+The offset is specified in milliseconds from the start of the sample.
+
+Beware that this function can fail for several reasons. If the S\-D\-L\-\_\-\-R\-Wops that feeds the decoder can not seek, this call will almost certainly fail, but this can theoretically be avoided by wrapping it in some sort of buffering S\-D\-L\-\_\-\-R\-Wops. Some decoders can never seek, others can only seek with certain files. The decoders will set a flag in the sample at creation time to help you determine this.
+
+You should check sample-\/$>$flags \& S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-C\-A\-N\-S\-E\-E\-K before attempting. \doxyref{Sound\-\_\-\-Seek()}{p.}{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b} reports failure immediately if this flag isn't set. This function can still fail for other reasons if the flag is set.
+
+This function can be emulated in the application with \doxyref{Sound\-\_\-\-Rewind()}{p.}{SDL__sound_8h_a720f92a75c0340c879c945ec3e9fdf70} and predecoding a specific amount of the sample, but this can be extremely inefficient. \doxyref{Sound\-\_\-\-Seek()}{p.}{SDL__sound_8h_ad8b48e7fdb78c95e7ff88cea097af18b} accelerates the seek on a with decoder-\/specific code.
+
+If this function fails, the sample should continue to function as if this call was never made. If there was an unrecoverable error, sample-\/$>$flags \& S\-O\-U\-N\-D\-\_\-\-S\-A\-M\-P\-L\-E\-F\-L\-A\-G\-\_\-\-E\-R\-R\-O\-R will be set, which you regular decoding loop can pick up.
+
+On success, E\-R\-R\-O\-R, E\-O\-F, and E\-A\-G\-A\-I\-N are cleared from sample-\/$>$flags.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & The \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} to seek. \\
+\hline
+{\em ms} & The new position, in milliseconds from start of sample. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+nonzero on success, zero on error. Specifics of the error can be gleaned from \doxyref{Sound\-\_\-\-Get\-Error()}{p.}{SDL__sound_8h_adb99dd3e7266c234e437bebf3be9e061}.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Rewind}{p.}{SDL__sound_8h_a720f92a75c0340c879c945ec3e9fdf70} 
+\end{DoxySeeAlso}
+\index{S\-D\-L\-\_\-sound.\-h@{S\-D\-L\-\_\-sound.\-h}!Sound\-\_\-\-Set\-Buffer\-Size@{Sound\-\_\-\-Set\-Buffer\-Size}}
+\index{Sound\-\_\-\-Set\-Buffer\-Size@{Sound\-\_\-\-Set\-Buffer\-Size}!SDL_sound.h@{S\-D\-L\-\_\-sound.\-h}}
+\subsubsection[{Sound\-\_\-\-Set\-Buffer\-Size}]{\setlength{\rightskip}{0pt plus 5cm}int Sound\-\_\-\-Set\-Buffer\-Size (
+\begin{DoxyParamCaption}
+\item[{{\bf Sound\-\_\-\-Sample} $\ast$}]{sample, }
+\item[{Uint32}]{new\-\_\-size}
+\end{DoxyParamCaption}
+)}\label{SDL__sound_8h_ac09076aa2bdc14d08130e25a6915279d}
+
+
+Change the current buffer size for a sample. 
+
+If the buffer size could be changed, then the sample-\/$>$buffer and sample-\/$>$buffer\-\_\-size fields will reflect that. If they could not be changed, then your original sample state is preserved. If the buffer is shrinking, the data at the end of buffer is truncated. If the buffer is growing, the contents of the new space at the end is undefined until you decode more into it or initialize it yourself.
+
+The buffer size specified must be a multiple of the size of a single sample point. So, if you want 16-\/bit, stereo samples, then your sample point size is (2 channels $\ast$ 16 bits), or 32 bits per sample, which is four bytes. In such a case, you could specify 128 or 132 bytes for a buffer, but not 129, 130, or 131 (although in reality, you'll want to specify a M\-U\-C\-H larger buffer).
+
+
+\begin{DoxyParams}{Parameters}
+{\em sample} & The \doxyref{Sound\-\_\-\-Sample}{p.}{structSound__Sample} whose buffer to modify. \\
+\hline
+{\em new\-\_\-size} & The desired size, in bytes, of the new buffer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+non-\/zero if buffer size changed, zero on failure.
+\end{DoxyReturn}
+\begin{DoxySeeAlso}{See Also}
+\doxyref{Sound\-\_\-\-Decode}{p.}{SDL__sound_8h_a6dbdf33dc4bc6b832fec2f4ffe5d546e} 
+
+\doxyref{Sound\-\_\-\-Decode\-All}{p.}{SDL__sound_8h_a07f8d77bb5449be3707625f58de1aba7} 
+\end{DoxySeeAlso}
