@@ -65,6 +65,21 @@ AC_PROG_LN_S
 AC_PROG_RANLIB
 LT_INIT
 
+dnl# Macros that I just want to see what autoupdate will do with
+dnl# (`autoreconf -fvi --warnings=all` reports warnings about these
+dnl# macros when they're used in m4 files in the m4 directory, but
+dnl# autoupdate only fixes stuff that is put directly in the configure.ac
+dnl# file, so try putting them here to see what will happen)
+AC_TRY_LINK([
+#include <stdio.h>
+])
+AC_TRY_RUN([
+#include <stdio.h>
+])
+AC_LANG_SAVE
+AC_LANG_C
+AC_LANG_RESTORE
+
 dnl#---------------------------------------------------------------------
 dnl# Debug mode?
 dnl#---------------------------------------------------------------------
