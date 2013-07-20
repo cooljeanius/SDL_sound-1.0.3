@@ -70,15 +70,16 @@ dnl# (`autoreconf -fvi --warnings=all` reports warnings about these
 dnl# macros when they're used in m4 files in the m4 directory, but
 dnl# autoupdate only fixes stuff that is put directly in the configure.ac
 dnl# file, so try putting them here to see what will happen)
-AC_TRY_LINK([
+AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 #include <stdio.h>
-])
-AC_TRY_RUN([
+]], [[
+#include <stdlib.h>
+]])],[],[])
+AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <stdio.h>
-])
-AC_LANG_SAVE
-AC_LANG_C
-AC_LANG_RESTORE
+]])],[],[],[])
+AC_LANG_PUSH([C])
+AC_LANG_POP([C])
 
 dnl#---------------------------------------------------------------------
 dnl# Debug mode?

@@ -4,17 +4,17 @@
 # Jack Moffitt <jack@icecast.org> 10-21-2000
 # Shamelessly stolen from Owen Taylor and Manish Singh
 
-dnl XIPH_PATH_SPEEX([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
-dnl Test for libspeex, and define SPEEX_CFLAGS and SPEEX_LIBS
-dnl
-AC_DEFUN([XIPH_PATH_SPEEX],
-[dnl 
-dnl Get the cflags and libraries
-dnl
-AC_ARG_WITH(speex,[  --with-speex=PFX   Prefix where libspeex is installed (optional)], speex_prefix="$withval", speex_prefix="")
-AC_ARG_WITH(speex-libraries,[  --with-speex-libraries=DIR   Directory where libspeex library is installed (optional)], speex_libraries="$withval", speex_libraries="")
-AC_ARG_WITH(speex-includes,[  --with-speex-includes=DIR   Directory where libspeex header files are installed (optional)], speex_includes="$withval", speex_includes="")
-AC_ARG_ENABLE(speextest, [  --disable-speextest       Do not try to compile and run a test Speex program],, enable_speextest=yes)
+dnl# XIPH_PATH_SPEEX([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
+dnl# Test for libspeex, and define SPEEX_CFLAGS and SPEEX_LIBS
+dnl#
+AC_DEFUN([XIPH_PATH_SPEEX],[
+dnl#
+dnl# Get the cflags and libraries
+dnl#
+AC_ARG_WITH([speex],[  --with-speex=PFX   Prefix where libspeex is installed (optional)], [speex_prefix="$withval"], [speex_prefix=""])
+AC_ARG_WITH([speex-libraries],[  --with-speex-libraries=DIR   Directory where libspeex library is installed (optional)], [speex_libraries="$withval"], [speex_libraries=""])
+AC_ARG_WITH([speex-includes],[  --with-speex-includes=DIR   Directory where libspeex header files are installed (optional)], [speex_includes="$withval"], [speex_includes=""])
+AC_ARG_ENABLE([speextest], [  --disable-speextest       Do not try to compile and run a test Speex program],[], [enable_speextest=yes])
 
   if test "x$speex_libraries" != "x" ; then
     SPEEX_LIBS="-L$speex_libraries"
@@ -43,11 +43,11 @@ AC_ARG_ENABLE(speextest, [  --disable-speextest       Do not try to compile and 
     ac_save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $SPEEX_CFLAGS"
     LIBS="$LIBS $SPEEX_LIBS"
-dnl
-dnl Now check if the installed Speex is sufficiently new.
-dnl
-      rm -f conf.speextest
-      AC_TRY_RUN([
+dnl#
+dnl# Now check if the installed Speex is sufficiently new.
+dnl#
+      rm -rf conf.speextest
+      AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -59,26 +59,26 @@ int main ()
   return 0;
 }
 
-],, no_speex=yes,[echo $ac_n "cross compiling; assumed OK... $ac_c"])
+]])],[], [no_speex=yes],[echo $ac_n "cross compiling; assumed OK... $ac_c"])
        CFLAGS="$ac_save_CFLAGS"
        LIBS="$ac_save_LIBS"
   fi
 
   if test "x$no_speex" = "x" ; then
      AC_MSG_RESULT(yes)
-     ifelse([$1], , :, [$1])     
+     ifelse([$1], [], [:], [$1])     
   else
-     AC_MSG_RESULT(no)
+     AC_MSG_RESULT([no])
      if test -f conf.speextest ; then
        :
      else
        echo "*** Could not run Speex test program, checking why..."
        CFLAGS="$CFLAGS $SPEEX_CFLAGS"
        LIBS="$LIBS $SPEEX_LIBS"
-       AC_TRY_LINK([
+       AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 #include <stdio.h>
 #include <speex/speex.h>
-],     [ return 0; ],
+]],    [[ return 0; ]])],
        [ echo "*** The test program compiled, but did not run. This usually means"
        echo "*** that the run-time linker is not finding Speex or finding the wrong"
        echo "*** version of Speex. If it is not finding Speex, you'll need to set your"
@@ -96,9 +96,9 @@ int main ()
      fi
      SPEEX_CFLAGS=""
      SPEEX_LIBS=""
-     ifelse([$2], , :, [$2])
+     ifelse([$2], [], [:], [$2])
   fi
-  AC_SUBST(SPEEX_CFLAGS)
-  AC_SUBST(SPEEX_LIBS)
-  rm -f conf.speextest
+  AC_SUBST([SPEEX_CFLAGS])
+  AC_SUBST([SPEEX_LIBS])
+  rm -rf conf.speextest
 ])

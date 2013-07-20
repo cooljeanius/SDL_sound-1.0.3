@@ -2,17 +2,17 @@
 # Jack Moffitt <jack@icecast.org> 10-21-2000
 # Shamelessly stolen from Owen Taylor and Manish Singh
 
-dnl XIPH_PATH_OGG([ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND]])
-dnl Test for libogg, and define OGG_CFLAGS and OGG_LIBS
-dnl
-AC_DEFUN([XIPH_PATH_OGG],
-[dnl 
-dnl Get the cflags and libraries
-dnl
-AC_ARG_WITH(ogg,AC_HELP_STRING([--with-ogg=PFX],[Prefix where libogg is installed (optional)]), ogg_prefix="$withval", ogg_prefix="")
-AC_ARG_WITH(ogg-libraries,AC_HELP_STRING([--with-ogg-libraries=DIR],[Directory where libogg library is installed (optional)]), ogg_libraries="$withval", ogg_libraries="")
-AC_ARG_WITH(ogg-includes,AC_HELP_STRING([--with-ogg-includes=DIR],[Directory where libogg header files are installed (optional)]), ogg_includes="$withval", ogg_includes="")
-AC_ARG_ENABLE(oggtest,AC_HELP_STRING([--disable-oggtest],[Do not try to compile and run a test Ogg program]),, enable_oggtest=yes)
+dnl# XIPH_PATH_OGG([ACTION-IF-FOUND], [ACTION-IF-NOT-FOUND])
+dnl# Test for libogg, and define OGG_CFLAGS and OGG_LIBS
+dnl#
+AC_DEFUN([XIPH_PATH_OGG],[
+dnl# 
+dnl# Get the cflags and libraries
+dnl#
+AC_ARG_WITH([ogg],[AC_HELP_STRING([--with-ogg=PFX],[Prefix where libogg is installed (optional)])], [ogg_prefix="$withval"], [ogg_prefix=""])
+AC_ARG_WITH([ogg-libraries],[AC_HELP_STRING([--with-ogg-libraries=DIR],[Directory where libogg library is installed (optional)])], [ogg_libraries="$withval"], [ogg_libraries=""])
+AC_ARG_WITH([ogg-includes],[AC_HELP_STRING([--with-ogg-includes=DIR],[Directory where libogg header files are installed (optional)])], [ogg_includes="$withval"], [ogg_includes=""])
+AC_ARG_ENABLE([oggtest],[AC_HELP_STRING([--disable-oggtest],[Do not try to compile and run a test Ogg program])],[], [enable_oggtest=yes])
 
   if test "x$ogg_libraries" != "x" ; then
     OGG_LIBS="-L$ogg_libraries"
@@ -38,7 +38,7 @@ AC_ARG_ENABLE(oggtest,AC_HELP_STRING([--disable-oggtest],[Do not try to compile 
     OGG_CFLAGS="-I$prefix/include"
   fi
 
-  AC_MSG_CHECKING(for Ogg)
+  AC_MSG_CHECKING([for Ogg])
   if test "x$ogg_prefix" = "xno" ; then
     no_ogg="disabled"
     enable_oggtest="no"
@@ -52,11 +52,11 @@ AC_ARG_ENABLE(oggtest,AC_HELP_STRING([--disable-oggtest],[Do not try to compile 
     ac_save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $OGG_CFLAGS"
     LIBS="$LIBS $OGG_LIBS"
-dnl
-dnl Now check if the installed Ogg is sufficiently new.
-dnl
-      rm -f conf.oggtest
-      AC_TRY_RUN([
+dnl#
+dnl# Now check if the installed Ogg is sufficiently new.
+dnl#
+      rm -rf conf.oggtest
+      AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -68,29 +68,29 @@ int main ()
   return 0;
 }
 
-],, no_ogg=yes,[echo $ac_n "cross compiling; assumed OK... $ac_c"])
+]])],[], [no_ogg=yes],[echo $ac_n "cross compiling; assumed OK... $ac_c"])
        CFLAGS="$ac_save_CFLAGS"
        LIBS="$ac_save_LIBS"
   fi
 
   if test "x$no_ogg" = "xdisabled" ; then
-     AC_MSG_RESULT(no)
-     ifelse([$2], , :, [$2])
+     AC_MSG_RESULT([no])
+     ifelse([$2], [], [:], [$2])
   elif test "x$no_ogg" = "x" ; then
      AC_MSG_RESULT(yes)
-     ifelse([$1], , :, [$1])
+     ifelse([$1], [], [:], [$1])
   else
-     AC_MSG_RESULT(no)
+     AC_MSG_RESULT([no])
      if test -f conf.oggtest ; then
        :
      else
        echo "*** Could not run Ogg test program, checking why..."
        CFLAGS="$CFLAGS $OGG_CFLAGS"
        LIBS="$LIBS $OGG_LIBS"
-       AC_TRY_LINK([
+       AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 #include <stdio.h>
 #include <ogg/ogg.h>
-],     [ return 0; ],
+]],    [[ return 0; ]])],
        [ echo "*** The test program compiled, but did not run. This usually means"
        echo "*** that the run-time linker is not finding Ogg or finding the wrong"
        echo "*** version of Ogg. If it is not finding Ogg, you'll need to set your"
@@ -108,9 +108,9 @@ int main ()
      fi
      OGG_CFLAGS=""
      OGG_LIBS=""
-     ifelse([$2], , :, [$2])
+     ifelse([$2], [], [:], [$2])
   fi
-  AC_SUBST(OGG_CFLAGS)
-  AC_SUBST(OGG_LIBS)
-  rm -f conf.oggtest
+  AC_SUBST([OGG_CFLAGS])
+  AC_SUBST([OGG_LIBS])
+  rm -rf conf.oggtest
 ])

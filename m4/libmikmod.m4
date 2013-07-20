@@ -4,20 +4,20 @@
 # Improved by Chris Butler
 #
 
-dnl AM_PATH_LIBMIKMOD([MINIMUM-VERSION, [ACTION-IF-FOUND [, ACTION-IF-NOT-FOUND ]]])
-dnl Test for libmikmod, and define LIBMIKMOD_CFLAGS, LIBMIKMOD_LIBS and
-dnl LIBMIKMOD_LDADD
-dnl
-AC_DEFUN([AM_PATH_LIBMIKMOD],
-[dnl 
-dnl Get the cflags and libraries from the libmikmod-config script
-dnl
-AC_ARG_WITH(libmikmod-prefix,[  --with-libmikmod-prefix=PFX   Prefix where libmikmod is installed (optional)],
-            libmikmod_config_prefix="$withval", libmikmod_config_prefix="")
-AC_ARG_WITH(libmikmod-exec-prefix,[  --with-libmikmod-exec-prefix=PFX Exec prefix where libmikmod is installed (optional)],
-            libmikmod_config_exec_prefix="$withval", libmikmod_config_exec_prefix="")
-AC_ARG_ENABLE(libmikmodtest, [  --disable-libmikmodtest       Do not try to compile and run a test libmikmod program],
-		    , enable_libmikmodtest=yes)
+dnl# AM_PATH_LIBMIKMOD([MINIMUM-VERSION], [ACTION-IF-FOUND], [ACTION-IF-NOT-FOUND])
+dnl# Test for libmikmod, and define LIBMIKMOD_CFLAGS, LIBMIKMOD_LIBS and
+dnl# LIBMIKMOD_LDADD
+dnl#
+AC_DEFUN([AM_PATH_LIBMIKMOD],[
+dnl# 
+dnl# Get the cflags and libraries from the libmikmod-config script
+dnl#
+AC_ARG_WITH([libmikmod-prefix],[  --with-libmikmod-prefix=PFX   Prefix where libmikmod is installed (optional)],
+            [libmikmod_config_prefix="$withval"], [libmikmod_config_prefix=""])
+AC_ARG_WITH([libmikmod-exec-prefix],[  --with-libmikmod-exec-prefix=PFX Exec prefix where libmikmod is installed (optional)],
+            [libmikmod_config_exec_prefix="$withval"], [libmikmod_config_exec_prefix=""])
+AC_ARG_ENABLE([libmikmodtest], [  --disable-libmikmodtest       Do not try to compile and run a test libmikmod program],
+		    [], [enable_libmikmodtest=yes])
 
   if test x$libmikmod_config_exec_prefix != x ; then
      libmikmod_config_args="$libmikmod_config_args --exec-prefix=$libmikmod_config_exec_prefix"
@@ -32,9 +32,9 @@ AC_ARG_ENABLE(libmikmodtest, [  --disable-libmikmodtest       Do not try to comp
      fi
   fi
 
-  AC_PATH_PROG(LIBMIKMOD_CONFIG, libmikmod-config, no)
-  min_libmikmod_version=ifelse([$1], ,3.1.5,$1)
-  AC_MSG_CHECKING(for libmikmod - version >= $min_libmikmod_version)
+  AC_PATH_PROG([LIBMIKMOD_CONFIG], [libmikmod-config], [no])
+  min_libmikmod_version=ifelse([$1], [],[3.1.5],[$1])
+  AC_MSG_CHECKING([for libmikmod - version >= $min_libmikmod_version])
   no_libmikmod=""
   if test "$LIBMIKMOD_CONFIG" = "no" ; then
     no_libmikmod=yes
@@ -51,16 +51,15 @@ AC_ARG_ENABLE(libmikmodtest, [  --disable-libmikmodtest       Do not try to comp
     if test "x$enable_libmikmodtest" = "xyes" ; then
       ac_save_CFLAGS="$CFLAGS"
       ac_save_LIBS="$LIBS"
-	  AC_LANG_SAVE
-	  AC_LANG_C
+	  AC_LANG_PUSH([C])
       CFLAGS="$CFLAGS $LIBMIKMOD_CFLAGS $LIBMIKMOD_LDADD"
       LIBS="$LIBMIKMOD_LIBS $LIBS"
-dnl
-dnl Now check if the installed libmikmod is sufficiently new. (Also sanity
-dnl checks the results of libmikmod-config to some extent
-dnl
-      rm -f conf.mikmodtest
-      AC_TRY_RUN([
+dnl#
+dnl# Now check if the installed libmikmod is sufficiently new. (Also sanity
+dnl# checks the results of libmikmod-config to some extent
+dnl#
+      rm -rf conf.mikmodtest
+      AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <mikmod.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -148,17 +147,17 @@ int main()
     }
   return 1;
 }
-],, no_libmikmod=yes,[echo $ac_n "cross compiling; assumed OK... $ac_c"])
+]])],[], [no_libmikmod=yes],[echo $ac_n "cross compiling; assumed OK... $ac_c"])
        CFLAGS="$ac_save_CFLAGS"
        LIBS="$ac_save_LIBS"
-	   AC_LANG_RESTORE
+	   AC_LANG_POP([C])
      fi
   fi
   if test "x$no_libmikmod" = x ; then
      AC_MSG_RESULT([yes, `$LIBMIKMOD_CONFIG --version`])
-     ifelse([$2], , :, [$2])     
+     ifelse([$2], [], [:], [$2])     
   else
-     AC_MSG_RESULT(no)
+     AC_MSG_RESULT([no])
      if test "$LIBMIKMOD_CONFIG" = "no" ; then
        echo "*** The libmikmod-config script installed by libmikmod could not be found"
        echo "*** If libmikmod was installed in PREFIX, make sure PREFIX/bin is in"
@@ -171,12 +170,11 @@ int main()
           echo "*** Could not run libmikmod test program, checking why..."
           CFLAGS="$CFLAGS $LIBMIKMOD_CFLAGS"
           LIBS="$LIBS $LIBMIKMOD_LIBS"
-		  AC_LANG_SAVE
-		  AC_LANG_C
-          AC_TRY_LINK([
+		  AC_LANG_PUSH([C])
+          AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 #include <mikmod.h>
 #include <stdio.h>
-],      [ return (MikMod_GetVersion()!=0); ],
+]],     [[ return (MikMod_GetVersion()!=0); ]])],
         [ echo "*** The test program compiled, but did not run. This usually means"
           echo "*** that the run-time linker is not finding libmikmod or finding the wrong"
           echo "*** version of libmikmod. If it is not finding libmikmod, you'll need to set your"
@@ -192,16 +190,16 @@ int main()
           echo "*** may want to edit the libmikmod-config script: $LIBMIKMOD_CONFIG" ])
           CFLAGS="$ac_save_CFLAGS"
           LIBS="$ac_save_LIBS"
-		  AC_LANG_RESTORE
+		  AC_LANG_POP([C])
        fi
      fi
      LIBMIKMOD_CFLAGS=""
      LIBMIKMOD_LIBS=""
      LIBMIKMOD_LDADD=""
-     ifelse([$3], , :, [$3])
+     ifelse([$3], [], [:], [$3])
   fi
-  AC_SUBST(LIBMIKMOD_CFLAGS)
-  AC_SUBST(LIBMIKMOD_LIBS)
-  AC_SUBST(LIBMIKMOD_LDADD)
-  rm -f conf.mikmodtest
+  AC_SUBST([LIBMIKMOD_CFLAGS])
+  AC_SUBST([LIBMIKMOD_LIBS])
+  AC_SUBST([LIBMIKMOD_LDADD])
+  rm -rf conf.mikmodtest
 ])

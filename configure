@@ -1511,8 +1511,7 @@ Optional Features:
   --enable-shn               enable SHN decoding default=yes
   --enable-midi              enable software MIDI music default=yes
   --enable-smpeg             enable MP3 decoding via smpeg default=yes
-  --disable-smpegtest       Do not try to compile
-and run a test SMPEG program
+  --disable-smpegtest       Do not try to compile and run a test SMPEG program
   --enable-mpglib            enable MP3 decoding internally default=yes
   --enable-mikmod            enable MOD decoding via mikmod default=yes
   --disable-libmikmodtest       Do not try to compile and run a test libmikmod program
@@ -1536,10 +1535,8 @@ Optional Packages:
                         (or the compiler's sysroot if not specified).
   --with-sdl-prefix=PFX   Prefix where SDL is installed (optional)
   --with-sdl-exec-prefix=PFX Exec prefix where SDL is installed (optional)
-  --with-smpeg-prefix=PFX   Prefix where SMPEG is
-installed (optional)
-  --with-smpeg-exec-prefix=PFX Exec prefix
-where SMPEG is installed (optional)
+  --with-smpeg-prefix=PFX   Prefix where SMPEG is installed (optional)
+  --with-smpeg-exec-prefix=PFX Exec prefix where SMPEG is installed (optional)
   --with-libmikmod-prefix=PFX   Prefix where libmikmod is installed (optional)
   --with-libmikmod-exec-prefix=PFX Exec prefix where libmikmod is installed (optional)
   --with-ogg=PFX          Prefix where libogg is installed (optional)
@@ -15846,6 +15843,8 @@ int
 main ()
 {
 
+#include <stdlib.h>
+
   ;
   return 0;
 }
@@ -15873,7 +15872,6 @@ fi
 rm -f core *.core core.conftest.* gmon.out bb.out conftest$ac_exeext \
   conftest.$ac_objext conftest.beam conftest.$ac_ext
 fi
-
 
 ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
@@ -16023,7 +16021,7 @@ $as_echo_n "checking for SDL - version >= $min_sdl_version... " >&6; }
       CFLAGS="$CFLAGS $SDL_CFLAGS"
       CXXFLAGS="$CXXFLAGS $SDL_CFLAGS"
       LIBS="$LIBS $SDL_LIBS"
-      rm -f conf.sdltest
+      rm -rf conf.sdltest
       if test "$cross_compiling" = yes; then :
   echo $ac_n "cross compiling; assumed OK... $ac_c"
 else
@@ -16333,6 +16331,7 @@ $as_echo "#define SOUND_SUPPORTS_SMPEG 1" >>confdefs.h
 fi
 
 
+
 # Check whether --with-smpeg-prefix was given.
 if test "${with_smpeg_prefix+set}" = set; then :
   withval=$with_smpeg_prefix; smpeg_prefix="$withval"
@@ -16431,7 +16430,7 @@ $as_echo_n "checking for SMPEG - version >= $min_smpeg_version... " >&6; }
       ac_save_LIBS="$LIBS"
       CFLAGS="$CFLAGS $SMPEG_CFLAGS $SDL_CFLAGS"
       LIBS="$LIBS $SMPEG_LIBS $SDL_LIBS"
-      rm -f conf.smpegtest
+      rm -rf conf.smpegtest
       if test "$cross_compiling" = yes; then :
   echo $ac_n "cross compiling; assumed OK... $ac_c"
 else
@@ -16485,16 +16484,11 @@ int main (int argc, char *argv[])
     }
   else
     {
-      printf("\n*** 'smpeg-config --version' returned %d.%d.%d, but the
-minimum version\n", $smpeg_major_version, $smpeg_minor_version,
-$smpeg_micro_version);
-      printf("*** of SMPEG required is %d.%d.%d. If smpeg-config is
-correct, then it is\n", major, minor, micro);
+      printf("\n*** 'smpeg-config --version' returned %d.%d.%d, but the minimum version\n", $smpeg_major_version, $smpeg_minor_version, $smpeg_micro_version);
+      printf("*** of SMPEG required is %d.%d.%d. If smpeg-config is correct, then it is\n", major, minor, micro);
       printf("*** best to upgrade to the required version.\n");
-      printf("*** If smpeg-config was wrong, set the environment variable
-SMPEG_CONFIG\n");
-      printf("*** to point to the correct copy of smpeg-config, and remove
-the file\n");
+      printf("*** If smpeg-config was wrong, set the environment variable SMPEG_CONFIG\n");
+      printf("*** to point to the correct copy of smpeg-config, and remove the file\n");
       printf("*** config.cache before re-running configure\n");
       return 1;
     }
@@ -16523,12 +16517,9 @@ $as_echo "yes" >&6; }
      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
      if test "$SMPEG_CONFIG" = "no" ; then
-       echo "*** The smpeg-config script installed by SMPEG could not be
-found"
-       echo "*** If SMPEG was installed in PREFIX, make sure PREFIX/bin is
-in"
-       echo "*** your path, or set the SMPEG_CONFIG environment variable to
-the"
+       echo "*** The smpeg-config script installed by SMPEG could not be found"
+       echo "*** If SMPEG was installed in PREFIX, make sure PREFIX/bin is in"
+       echo "*** your path, or set the SMPEG_CONFIG environment variable to the"
        echo "*** full path to smpeg-config."
      else
        if test -f conf.smpegtest ; then
@@ -16552,31 +16543,20 @@ main ()
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-   echo "*** The test program compiled, but did not run. This
-usually means"
-          echo "*** that the run-time linker is not finding SMPEG or
-finding the wrong"
-          echo "*** version of SMPEG. If it is not finding SMPEG, you'll
-need to set your"
-          echo "*** LD_LIBRARY_PATH environment variable, or edit
-/etc/ld.so.conf to point"
-          echo "*** to the installed location  Also, make sure you have run
-ldconfig if that"
+   echo "*** The test program compiled, but did not run. This usually means"
+          echo "*** that the run-time linker is not finding SMPEG or finding the wrong"
+          echo "*** version of SMPEG. If it is not finding SMPEG, you'll need to set your"
+          echo "*** LD_LIBRARY_PATH environment variable, or edit /etc/ld.so.conf to point"
+          echo "*** to the installed location  Also, make sure you have run ldconfig if that"
           echo "*** is required on your system"
           echo "***"
-          echo "*** If you have an old version installed, it is best to
-remove it, although"
-          echo "*** you may also be able to get things to work by modifying
-LD_LIBRARY_PATH"
+          echo "*** If you have an old version installed, it is best to remove it, although"
+          echo "*** you may also be able to get things to work by modifying LD_LIBRARY_PATH"
 else
-   echo "*** The test program failed to compile or link. See the
-file config.log for the"
-          echo "*** exact error that occured. This usually means SMPEG was
-incorrectly installed"
-          echo "*** or that you have moved SMPEG since it was installed. In
-the latter case, you"
-          echo "*** may want to edit the smpeg-config script:
-$SMPEG_CONFIG"
+   echo "*** The test program failed to compile or link. See the file config.log for the"
+          echo "*** exact error that occured. This usually means SMPEG was incorrectly installed"
+          echo "*** or that you have moved SMPEG since it was installed. In the latter case, you"
+          echo "*** may want to edit the smpeg-config script: $SMPEG_CONFIG"
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
@@ -16590,7 +16570,7 @@ rm -f core conftest.err conftest.$ac_objext \
   fi
 
 
-  rm -f conf.smpegtest
+  rm -rf conf.smpegtest
 
 
 # Check whether --enable-mpglib was given.
@@ -16668,6 +16648,7 @@ $as_echo "#define SOUND_SUPPORTS_MIKMOD 1" >>confdefs.h
 
   fi
 fi
+
 
 
 # Check whether --with-libmikmod-prefix was given.
@@ -16766,7 +16747,6 @@ $as_echo_n "checking for libmikmod - version >= $min_libmikmod_version... " >&6;
     if test "x$enable_libmikmodtest" = "xyes" ; then
       ac_save_CFLAGS="$CFLAGS"
       ac_save_LIBS="$LIBS"
-
 	  ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -16775,7 +16755,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
       CFLAGS="$CFLAGS $LIBMIKMOD_CFLAGS $LIBMIKMOD_LDADD"
       LIBS="$LIBMIKMOD_LIBS $LIBS"
-      rm -f conf.mikmodtest
+      rm -rf conf.mikmodtest
       if test "$cross_compiling" = yes; then :
   echo $ac_n "cross compiling; assumed OK... $ac_c"
 else
@@ -16909,7 +16889,6 @@ $as_echo "no" >&6; }
           echo "*** Could not run libmikmod test program, checking why..."
           CFLAGS="$CFLAGS $LIBMIKMOD_CFLAGS"
           LIBS="$LIBS $LIBMIKMOD_LIBS"
-
 		  ac_ext=c
 ac_cpp='$CPP $CPPFLAGS'
 ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
@@ -16966,7 +16945,7 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
 
 
 
-  rm -f conf.mikmodtest
+  rm -rf conf.mikmodtest
 
 
 # Check whether --enable-modplug was given.
@@ -17099,6 +17078,7 @@ if test x$have_ogg_hdr = xyes -a x$have_ogg_lib = xyes; then
 fi
 
 
+
 # Check whether --with-ogg was given.
 if test "${with_ogg+set}" = set; then :
   withval=$with_ogg; ogg_prefix="$withval"
@@ -17169,7 +17149,7 @@ $as_echo_n "checking for Ogg... " >&6; }
     ac_save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $OGG_CFLAGS"
     LIBS="$LIBS $OGG_LIBS"
-      rm -f conf.oggtest
+      rm -rf conf.oggtest
       if test "$cross_compiling" = yes; then :
   echo $ac_n "cross compiling; assumed OK... $ac_c"
 else
@@ -17259,7 +17239,7 @@ rm -f core conftest.err conftest.$ac_objext \
   fi
 
 
-  rm -f conf.oggtest
+  rm -rf conf.oggtest
 
 
 # Check whether --enable-vorbis was given.
@@ -17381,6 +17361,7 @@ $as_echo "#define SOUND_SUPPORTS_OGG 1" >>confdefs.h
 fi
 
 
+
 # Check whether --with-vorbis was given.
 if test "${with_vorbis+set}" = set; then :
   withval=$with_vorbis; vorbis_prefix="$withval"
@@ -17438,7 +17419,6 @@ fi
     VORBIS_CFLAGS="-I$prefix/include"
   fi
 
-
   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Vorbis" >&5
 $as_echo_n "checking for Vorbis... " >&6; }
   if test "x$vorbis_prefix" = "xno" ; then
@@ -17448,13 +17428,12 @@ $as_echo_n "checking for Vorbis... " >&6; }
     no_vorbis=""
   fi
 
-
   if test "x$enable_vorbistest" = "xyes" ; then
     ac_save_CFLAGS="$CFLAGS"
     ac_save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $VORBIS_CFLAGS $OGG_CFLAGS"
     LIBS="$LIBS $VORBIS_LIBS $VORBISENC_LIBS $OGG_LIBS"
-      rm -f conf.vorbistest
+      rm -rf conf.vorbistest
       if test "$cross_compiling" = yes; then :
   echo $ac_n "cross compiling; assumed OK... $ac_c"
 else
@@ -17560,7 +17539,7 @@ rm -f core conftest.err conftest.$ac_objext \
 
 
 
-  rm -f conf.vorbistest
+  rm -rf conf.vorbistest
 
 
 
@@ -17741,6 +17720,7 @@ $as_echo "#define SOUND_SUPPORTS_SPEEX 1" >>confdefs.h
 fi
 
 
+
 # Check whether --with-speex was given.
 if test "${with_speex+set}" = set; then :
   withval=$with_speex; speex_prefix="$withval"
@@ -17800,7 +17780,7 @@ $as_echo_n "checking for Speex... " >&6; }
     ac_save_LIBS="$LIBS"
     CFLAGS="$CFLAGS $SPEEX_CFLAGS"
     LIBS="$LIBS $SPEEX_LIBS"
-      rm -f conf.speextest
+      rm -rf conf.speextest
       if test "$cross_compiling" = yes; then :
   echo $ac_n "cross compiling; assumed OK... $ac_c"
 else
@@ -17886,7 +17866,7 @@ rm -f core conftest.err conftest.$ac_objext \
   fi
 
 
-  rm -f conf.speextest
+  rm -rf conf.speextest
 
 
 # Check whether --enable-physfs was given.
