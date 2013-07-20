@@ -13,11 +13,11 @@ AC_DEFUN([AM_PATH_SMPEG],[
 dnl#
 dnl# Get the cflags and libraries from the smpeg-config script
 dnl#
-AC_ARG_WITH([smpeg-prefix],[  --with-smpeg-prefix=PFX   Prefix where SMPEG is installed (optional)],
+AC_ARG_WITH([smpeg-prefix],[AS_HELP_STRING([--with-smpeg-prefix=PFX],[Prefix where SMPEG is installed (optional)])],
             [smpeg_prefix="$withval"], [smpeg_prefix=""])
-AC_ARG_WITH([smpeg-exec-prefix],[  --with-smpeg-exec-prefix=PFX Exec prefix where SMPEG is installed (optional)],
+AC_ARG_WITH([smpeg-exec-prefix],[AS_HELP_STRING([--with-smpeg-exec-prefix=PFX],[Exec prefix where SMPEG is installed (optional)])],
             [smpeg_exec_prefix="$withval"], [smpeg_exec_prefix=""])
-AC_ARG_ENABLE([smpegtest], [  --disable-smpegtest       Do not try to compile and run a test SMPEG program],
+AC_ARG_ENABLE([smpegtest], [AS_HELP_STRING([--disable-smpegtest],[Do not try to compile and run a test SMPEG program])],
                     [], [enable_smpegtest=yes])
 
   if test x$smpeg_exec_prefix != x ; then

@@ -11,10 +11,10 @@ AC_DEFUN([XIPH_PATH_SPEEX],[
 dnl#
 dnl# Get the cflags and libraries
 dnl#
-AC_ARG_WITH([speex],[  --with-speex=PFX   Prefix where libspeex is installed (optional)], [speex_prefix="$withval"], [speex_prefix=""])
-AC_ARG_WITH([speex-libraries],[  --with-speex-libraries=DIR   Directory where libspeex library is installed (optional)], [speex_libraries="$withval"], [speex_libraries=""])
-AC_ARG_WITH([speex-includes],[  --with-speex-includes=DIR   Directory where libspeex header files are installed (optional)], [speex_includes="$withval"], [speex_includes=""])
-AC_ARG_ENABLE([speextest], [  --disable-speextest       Do not try to compile and run a test Speex program],[], [enable_speextest=yes])
+AC_ARG_WITH([speex],[AS_HELP_STRING([--with-speex=PFX],[Prefix where libspeex is installed (optional)])], [speex_prefix="$withval"], [speex_prefix=""])
+AC_ARG_WITH([speex-libraries],[AS_HELP_STRING([--with-speex-libraries=DIR],[Directory where libspeex library is installed (optional)])], [speex_libraries="$withval"], [speex_libraries=""])
+AC_ARG_WITH([speex-includes],[AS_HELP_STRING([--with-speex-includes=DIR],[Directory where libspeex header files are installed (optional)])], [speex_includes="$withval"], [speex_includes=""])
+AC_ARG_ENABLE([speextest], [AS_HELP_STRING([--disable-speextest],[Do not try to compile and run a test Speex program])],[], [enable_speextest=yes])
 
   if test "x$speex_libraries" != "x" ; then
     SPEEX_LIBS="-L$speex_libraries"
@@ -34,9 +34,8 @@ AC_ARG_ENABLE([speextest], [  --disable-speextest       Do not try to compile an
     SPEEX_CFLAGS="-I$prefix/include"
   fi
 
-  AC_MSG_CHECKING(for Speex)
+  AC_MSG_CHECKING([for Speex])
   no_speex=""
-
 
   if test "x$enable_speextest" = "xyes" ; then
     ac_save_CFLAGS="$CFLAGS"

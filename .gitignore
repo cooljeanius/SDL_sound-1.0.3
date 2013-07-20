@@ -32,4 +32,5 @@ conftest.c
 conftest.err
 *.tar.gz
 *(Autosaved)*
+*.dSYM
 

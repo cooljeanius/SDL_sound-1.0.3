@@ -64,6 +64,7 @@ AC_PROG_INSTALL
 AC_PROG_LN_S
 AC_PROG_RANLIB
 LT_INIT
+LT_LANG([C])
 
 dnl# Macros that I just want to see what autoupdate will do with
 dnl# (`autoreconf -fvi --warnings=all` reports warnings about these
@@ -75,9 +76,6 @@ AC_LINK_IFELSE([AC_LANG_PROGRAM([[
 ]], [[
 #include <stdlib.h>
 ]])],[],[])
-AC_RUN_IFELSE([AC_LANG_SOURCE([[
-#include <stdio.h>
-]])],[],[],[])
 AC_LANG_PUSH([C])
 AC_LANG_POP([C])
 
@@ -86,7 +84,7 @@ dnl# Debug mode?
 dnl#---------------------------------------------------------------------
 
 AC_ARG_ENABLE([debug],
-[  --enable-debug             enable debug mode [default=no]],
+[AS_HELP_STRING([--enable-debug],[enable debug mode [default=no]])],
               [], [enable_debug=no])
 if test x$enable_debug = xyes; then
   if test x$ac_cv_prog_cc_g = xyes; then
@@ -112,19 +110,17 @@ AM_PATH_SDL([$SDL_VERSION],
 CFLAGS="$CFLAGS $SDL_CFLAGS"
 LIBS="$LIBS $SDL_LIBS"
 
-
 dnl# Check for voc decoder inclusion...
 AC_ARG_ENABLE([voc],
-[  --enable-voc               enable VOC decoding [default=yes]],
+[AS_HELP_STRING([--enable-voc],[enable VOC decoding [default=yes]])],
               [], [enable_voc=yes])
 if test x$enable_voc = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_VOC], [1], [Define if VOC support is desired.])
 fi
 
-
 dnl# Check for wav decoder inclusion...
 AC_ARG_ENABLE([wav],
-[  --enable-wav               enable WAV decoding [default=yes]],
+[AS_HELP_STRING([--enable-wav],[enable WAV decoding [default=yes]])],
               [], [enable_wav=yes])
 if test x$enable_wav = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_WAV], [1], [Define if WAV support is desired.])
@@ -133,7 +129,7 @@ fi
 
 dnl# Check for raw decoder inclusion...
 AC_ARG_ENABLE([raw],
-[  --enable-raw               enable raw audio "decoding" [default=yes]],
+[AS_HELP_STRING([--enable-raw],[enable raw audio "decoding" [default=yes]])],
               [], [enable_raw=yes])
 if test x$enable_raw = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_RAW], [1], [Define if RAW support is desired.])
@@ -142,15 +138,15 @@ fi
 
 dnl# Check for aiff decoder inclusion...
 AC_ARG_ENABLE([aiff],
-[  --enable-aiff              enable AIFF decoding [default=yes]],
+[AS_HELP_STRING([--enable-aiff],[enable AIFF decoding [default=yes]])],
               [], [enable_aiff=yes])
 if test x$enable_aiff = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_AIFF], [1], [Define if AIFF support is desired.])
 fi
 
-dnl# Check for au decoder inclusion
+dnl# Check for au decoder inclusion...
 AC_ARG_ENABLE([au],
-[  --enable-au                enable AU decoding [default=yes]],
+[AS_HELP_STRING([--enable-au],[enable AU decoding [default=yes]])],
               [], [enable_au=yes])
 if test x$enable_au = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_AU], [1], [Define if AU support is desired.])
@@ -158,7 +154,7 @@ fi
 
 dnl# Check for shn decoder inclusion...
 AC_ARG_ENABLE([shn],
-[  --enable-shn               enable SHN decoding [default=yes]],
+[AS_HELP_STRING([--enable-shn],[enable SHN decoding [default=yes]])],
               [], [enable_shn=yes])
 if test x$enable_shn = xyes; then
     AC_DEFINE([SOUND_SUPPORTS_SHN], [1], [Define if SHN support is desired.])
@@ -166,7 +162,7 @@ fi
 
 dnl# Check for the MIDI decoder...
 AC_ARG_ENABLE([midi],
-[  --enable-midi              enable software MIDI music [default=yes]],
+[AS_HELP_STRING([--enable-midi],[enable software MIDI music [default=yes]])],
               [], [enable_midi=yes])
 if test x$enable_midi = xyes; then
   AC_DEFINE([SOUND_SUPPORTS_MIDI], [1], [Define if MIDI support is desired.])
@@ -174,7 +170,7 @@ fi
 
 dnl# Check for SMPEG
 AC_ARG_ENABLE([smpeg],
-[  --enable-smpeg             enable MP3 decoding via smpeg [default=yes]],
+[AS_HELP_STRING([--enable-smpeg],[enable MP3 decoding via smpeg [default=yes]])],
               [], [enable_smpeg=yes])
 if test x$enable_smpeg = xyes; then
   AC_CHECK_HEADER([smpeg.h], [have_smpeg_hdr=yes])
@@ -190,7 +186,7 @@ AM_PATH_SMPEG
 
 dnl# Check for mpglib
 AC_ARG_ENABLE([mpglib],
-[  --enable-mpglib            enable MP3 decoding internally [default=yes]],
+[AS_HELP_STRING([--enable-mpglib],[enable MP3 decoding internally [default=yes]])],
               [], [enable_mpglib=yes])
 if test x$enable_mpglib = xyes; then
   AC_DEFINE([SOUND_SUPPORTS_MPGLIB], [1], [Define if MPGLIB support is desired.])
@@ -199,7 +195,7 @@ fi
 
 dnl# Check for libmikmod
 AC_ARG_ENABLE([mikmod],
-[  --enable-mikmod            enable MOD decoding via mikmod [default=yes]],
+[AS_HELP_STRING([--enable-mikmod],[enable MOD decoding via mikmod [default=yes]])],
               [], [enable_mikmod=yes])
 if test x$enable_mikmod = xyes; then
   AC_CHECK_HEADER([mikmod.h], [have_mikmod_hdr=yes])
@@ -215,7 +211,7 @@ AM_PATH_LIBMIKMOD
 
 dnl# Check for libmodplug
 AC_ARG_ENABLE([modplug],
-[  --enable-modplug           enable MOD decoding via modplug [default=yes]],
+[AS_HELP_STRING([--enable-modplug],[enable MOD decoding via modplug [default=yes]])],
               [], [enable_modplug=yes])
 if test x$enable_modplug = xyes; then
   have_modplug_hdr=no
@@ -249,7 +245,7 @@ dnl# !!! FIXME: should be --enable-vorbis.
 dnl# ^ OK, fixed (I think) (was originally --enable-ogg)
 dnl# Check for Ogg Vorbis
 AC_ARG_ENABLE([vorbis],
-[  --enable-vorbis               enable OGG decoding via libvorbis [default=yes]],
+[AS_HELP_STRING([ --enable-vorbis],[enable OGG decoding via libvorbis [default=yes]])],
               [], [enable_vorbis=yes])
 if test x$enable_vorbis = xyes; then
   AC_CHECK_HEADER([vorbis/codec.h], [have_vorbis_hdr=yes])
@@ -286,9 +282,9 @@ dnl#   the libFLAC .so version is also #defined in FLAC/export.h
 dnl# Hooray for shitty autoconf bugs! (Not sure if this bug exists any more?)
 x="C__stream_decoder_process_single"
 flcsym="FLA$x"
-dnl Check for libFLAC
+dnl# Check for libFLAC
 AC_ARG_ENABLE([flac],
-[  --enable-flac              enable FLAC decoding via libFLAC [default=yes]],
+[AS_HELP_STRING([--enable-flac],[enable FLAC decoding via libFLAC [default=yes]])],
               [], [enable_flac=yes])
 if test x$enable_flac = xyes; then
   AC_CHECK_HEADER([FLAC/stream_decoder.h], [have_flac_hdr=yes])
@@ -303,7 +299,7 @@ fi
 
 dnl# Check for speex
 AC_ARG_ENABLE([speex],
-[  --enable-speex               enable SPX decoding via libspeex [default=yes]],
+[AS_HELP_STRING([--enable-speex],[enable SPX decoding via libspeex [default=yes]])],
               [], [enable_speex=yes])
 if test x$enable_speex = xyes; then
   AC_CHECK_HEADER([ogg/ogg.h], [have_ogg_hdr=yes])
@@ -312,7 +308,7 @@ if test x$enable_speex = xyes; then
   AC_CHECK_LIB([speex], [speex_bits_init], [have_speex_lib=yes])
   if test "x$have_ogg_hdr" = "xyes" -a "x$have_ogg_lib" = "xyes" -a "x$have_speex_hdr" = "xyes" -a "x$have_speex_lib" = "xyes"; then
     LIBS="$LIBS -logg -lspeex"
-    AC_DEFINE(SOUND_SUPPORTS_SPEEX, 1, [Define if SPEEX support is desired.])
+    AC_DEFINE([SOUND_SUPPORTS_SPEEX], [1], [Define if SPEEX support is desired.])
   fi
 fi
 
@@ -321,7 +317,7 @@ XIPH_PATH_SPEEX
 
 dnl# Check for PhysicsFS http://icculus.org/physfs/
 AC_ARG_ENABLE([physfs],
-[  --enable-physfs            enable PhysicsFS in playsound [default=yes]],
+[AS_HELP_STRING([--enable-physfs],[enable PhysicsFS in playsound [default=yes]])],
               [], [enable_physfs=yes])
 if test x$enable_physfs = xyes; then
   AC_CHECK_HEADER([physfs.h], [have_physfs_hdr=yes])
@@ -335,18 +331,18 @@ fi
 
 dnl# Check for altcvt
 AC_ARG_ENABLE([altcvt],
-[  --enable-altcvt            enable EXPERIMENTAL audio converter [default=no]],
+[AS_HELP_STRING([--enable-altcvt],[enable EXPERIMENTAL audio converter [default=no]])],
               [], [enable_altcvt=no])
 if test x$enable_altcvt = xyes; then
   AC_DEFINE([SOUND_USE_ALTCVT], [1], [Define to use alternate audio converter.])
 fi
 
 # Checks for header files.
-AC_HEADER_STDC
 AC_C_PROTOTYPES
 AC_PATH_X
+AC_PATH_XTRA
 AC_FUNC_ALLOCA
-AC_CHECK_HEADERS([malloc.h stddef.h stdio.h stdlib.h string.h signal.h assert.h])
+AC_CHECK_HEADERS([malloc.h stddef.h stdio.h signal.h assert.h])
 AC_CHECK_HEADERS([IOKit/IOKitLib.h IOKit/hidsystem/IOLLEvent.h IOKit/IOTypes.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -357,7 +353,6 @@ AC_TYPE_INT8_T
 AC_TYPE_INT16_T
 AC_TYPE_INT32_T
 AC_TYPE_INT64_T
-AC_TYPE_SIZE_T
 AC_TYPE_UINT8_T
 AC_TYPE_UINT16_T
 AC_TYPE_UINT32_T
