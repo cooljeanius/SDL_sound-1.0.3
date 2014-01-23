@@ -857,7 +857,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = /opt/local/Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = "";
 				GCC_ENABLE_EXCEPTIONS = YES;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -901,6 +901,7 @@
 				USER_HEADER_SEARCH_PATHS = "\"$(SRCROOT)/vorbis/include\" \"$(SRCROOT)/mikmod/include\" \"$(SRCROOT)/../CWproject/include\" \"$(SRCROOT)/../CWproject/include/SDL\"";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
+				WARNING_CFLAGS = "-Wall";
 			};
 			name = Development;
 		};
@@ -1370,7 +1371,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXPORTED_SYMBOLS_FILE = exports/SDL_sound.x;
-				FRAMEWORK_SEARCH_PATHS = "\"/opt/local/Library/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = "";
 				FRAMEWORK_VERSION = A;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
@@ -1389,6 +1390,7 @@
 					SOUND_SUPPORTS_VOC,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_1)",
 					"$(HEADER_SEARCH_PATHS_QUOTED_FOR_TARGET_2)",

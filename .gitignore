@@ -13,6 +13,8 @@ stamp-h*
 */*deps/*.*o
 */*/*deps/*.*o
 libtool
+config.lt
+config*.lineno
 *.cache
 *.log
 *.status
@@ -31,6 +33,25 @@ confdefs.h
 conftest.c
 conftest.err
 *.tar.gz
+*.zip
 *(Autosaved)*
 *.dSYM
+*DS_Store*
+PBProjects/exports/Makefile
+so_locations
+site.exp
+site.bak
+*.sum
+*.tab.c
+TAGS
+ID
+GTAGS
+GRTAGS
+GSYMS
+GPATH
+tags
+cscope*.out
+cscope.files
+sdl_sound-1.0.3
+Doxyfile.bak
 

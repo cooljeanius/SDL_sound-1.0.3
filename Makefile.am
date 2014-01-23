@@ -1,4 +1,4 @@
-ACLOCAL_AMFLAGS = -I m4
+ACLOCAL_AMFLAGS = -I m4 --install
 
 lib_LTLIBRARIES = libSDL_sound.la
 
@@ -11,9 +11,9 @@ libSDL_soundinclude_HEADERS =	\
 libSDL_sound_la_SOURCES =	\
 	SDL_sound.c	\
 	SDL_sound_internal.h	\
-    alt_audio_convert.c   \
-    alt_audio_convert.h  \
-    audio_convert.c   \
+	alt_audio_convert.c   \
+	alt_audio_convert.h  \
+	audio_convert.c   \
 	extra_rwops.c	\
 	extra_rwops.h
 
@@ -40,11 +40,8 @@ EXTRA_DIST =	\
 	CREDITS \
 	COPYING \
 	CHANGELOG \
-	CWProject.sit \
-	PBProjects.tar.gz \
-	borland.zip \
 	Doxyfile \
-    VisualC
+	VisualC
 
 dist-hook:
 	mkdir $(distdir)/docs

@@ -26,30 +26,34 @@
  */
 
 #if HAVE_CONFIG_H
-#  include <config.h>
-#endif
+# include <config.h>
+#else
+# warning playsound.c expects "config.h" to be included.
+#endif /* HAVE_CONFIG_H */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #if HAVE_ASSERT_H
-#  include <assert.h>
+# include <assert.h>
 #elif (!defined assert)
-#  define assert(x)
-#endif
+# define assert(x)
+#endif /* HAVE_ASSERT_H */
 
 #if HAVE_SIGNAL_H
-#  include <signal.h>
-#endif
+# include <signal.h>
+#else
+# warning playsound.c expects <signal.h> to be included.
+#endif /* HAVE_SIGNAL_H */
 
 #include "SDL.h"
 #include "SDL_sound.h"
 
 #if SUPPORT_PHYSFS
-#include "physfs.h"
-#include "physfsrwops.h"
-#endif
+# include "physfs.h"
+# include "physfsrwops.h"
+#endif /* SUPPORT_PHYSFS */
 
 #define DEFAULT_DECODEBUF 16384
 #define DEFAULT_AUDIOBUF  4096
@@ -200,7 +204,6 @@ static void output_credits(void)
 } /* output_credits */
 
 
-
 /* archive stuff... */
 
 static int init_archive(const char *argv0)
@@ -211,10 +214,10 @@ static int init_archive(const char *argv0)
     retval = PHYSFS_init(argv0);
     if (!retval)
     {
-        fprintf(stderr, "Couldn't init PhysicsFS: %s\n",
+        fprintf(stderr, "Could NOT init PhysicsFS: %s\n",
                 PHYSFS_getLastError());
     } /* if */
-#endif
+#endif /* SUPPORT_PHYSFS */
 
     return(retval);
 } /* init_archive */
@@ -241,7 +244,7 @@ static SDL_RWops *rwops_from_physfs(const char *filename)
         *(archive++) = '\0';  /* blank '@', point to archive name. */
         if (!PHYSFS_addToSearchPath(archive, 0))
         {
-            fprintf(stderr, "Couldn't open archive: %s\n",
+            fprintf(stderr, "Could NOT open archive: %s\n",
                     PHYSFS_getLastError());
             free(path);
             return(NULL);
@@ -253,7 +256,7 @@ static SDL_RWops *rwops_from_physfs(const char *filename)
     free(path);
     return(retval);
 } /* rwops_from_physfs */
-#endif
+#endif /* SUPPORT_PHYSFS */
 
 
 static Sound_Sample *sample_from_archive(const char *fname,
@@ -278,7 +281,7 @@ static Sound_Sample *sample_from_archive(const char *fname,
         retval = Sound_NewSample(rw, ptr, desired, decode_buffersize);
         free(path);
     } /* if */
-#endif
+#endif /* SUPPORT_PHYSFS */
 
     return(retval);
 } /* sample_from_archive */
@@ -288,9 +291,10 @@ static void close_archive(const char *filename)
 {
 #if SUPPORT_PHYSFS
     char *archive_name = strchr(filename, '@');
-    if (archive_name != NULL)
+    if (archive_name != NULL) {
         PHYSFS_removeFromSearchPath(archive_name + 1);
-#endif
+	}
+#endif /* SUPPORT_PHYSFS */
 } /* close_archive */
 
 
@@ -298,9 +302,8 @@ static void deinit_archive(void)
 {
 #if SUPPORT_PHYSFS
     PHYSFS_deinit();
-#endif
+#endif /* SUPPORT_PHYSFS */
 } /* deinit_archive */
-
 
 
 static volatile int done_flag = 0;
@@ -330,7 +333,7 @@ void sigint_catcher(int signum)
         done_flag = 1;
     } /* else */
 } /* sigint_catcher */
-#endif
+#endif /* HAVE_SIGNAL_H */
 
 
 /* global decoding state. */
@@ -427,10 +430,10 @@ static int read_more_data(Sound_Sample *sample)
         global_state.decoded_bytes = global_state.bytes_before_next_seek;
     } /* if */
 
-    if (global_state.decoded_bytes > 0) /* don't need more data; just return. */
+    if (global_state.decoded_bytes > 0) /* do NOT need more data; just return. */
         return(global_state.decoded_bytes);
 
-        /* Need more audio data. See if we're supposed to seek... */
+        /* Need more audio data. See if we are supposed to seek... */
     if ((global_state.bytes_before_next_seek == 0) &&
         (global_state.seek_index < global_state.total_seeks))
     {
@@ -438,7 +441,7 @@ static int read_more_data(Sound_Sample *sample)
         return(read_more_data(sample));  /* handle loops conditions. */
     } /* if */
 
-        /* See if there's more to be read... */
+        /* See if there is more to be read... */
     if ( (global_state.bytes_before_next_seek != 0) &&
          (!(sample->flags & (SOUND_SAMPLEFLAG_ERROR | SOUND_SAMPLEFLAG_EOF))) )
     {
@@ -562,7 +565,7 @@ static void audio_callback(void *userdata, Uint8 *stream, int len)
 
         if (!read_more_data(sample)) /* read more data, if needed. */
         {
-            /* ...there isn't any more data to read! */
+            /* ...there is NOT any more data to read! */
             memset(stream + bw, '\0', len - bw);
             done_flag = 1;
             return;
@@ -720,7 +723,7 @@ static int valid_cmdline(int argc, char **argv)
             opts++;  /* skip option description. */
         } /* else */
 
-        if (*opts == NULL)  /* didn't find it in option_list... */
+        if (*opts == NULL)  /* did NOT find it in option_list... */
         {
             fprintf(stderr, "unknown option: \"%s\"\n", argv[i]);
             return(0);
@@ -749,12 +752,12 @@ int main(int argc, char **argv)
     SDL_Event event;
 
     sdl_init_flags |= SDL_INIT_VIDEO;
-    #endif
+    #endif /* ENABLE_EVENTS */
 
     #ifdef HAVE_SETBUF
         setbuf(stdout, NULL);
         setbuf(stderr, NULL);
-    #endif
+    #endif /* HAVE_SETBUF */
 
     if (!valid_cmdline(argc, argv))
         return(42);
@@ -819,12 +822,12 @@ int main(int argc, char **argv)
 
     #if HAVE_SIGNAL_H
         signal(SIGINT, sigint_catcher);
-    #endif
+    #endif /* HAVE_SIGNAL_H */
 
     #if ENABLE_EVENTS
         screen = SDL_SetVideoMode(320, 240, 8, 0);
         assert(screen != NULL);
-    #endif
+    #endif /* ENABLE_EVENTS */
 
     for (i = 1; i < argc; i++)
     {
@@ -948,13 +951,15 @@ int main(int argc, char **argv)
         } /* else */
 
         if (filename == NULL) /* still parsing command line stuff? */
+		{
             continue;
+		}
 
         new_sample = 1;
 
         if (sample == NULL)
         {
-            fprintf(stderr, "Couldn't load \"%s\"!\n"
+            fprintf(stderr, "Could NOT load \"%s\"!\n"
                             "  reason: [%s].\n",
                             filename, Sound_GetError());
             continue;
@@ -995,7 +1000,7 @@ int main(int argc, char **argv)
 
         if (SDL_OpenAudio(&sdl_desired, NULL) < 0)
         {
-            fprintf(stderr, "Couldn't open audio device!\n"
+            fprintf(stderr, "Could NOT open audio device!\n"
                             "  reason: [%s].\n", SDL_GetError());
             Sound_Quit();
             SDL_Quit();
@@ -1012,7 +1017,7 @@ int main(int argc, char **argv)
             if (sample->flags & SOUND_SAMPLEFLAG_ERROR)
             {
                 fprintf(stderr,
-                        "Couldn't fully decode \"%s\"!\n"
+                        "Could NOT fully decode \"%s\"!\n"
                         "  reason: [%s].\n"
                         "  (playing first %lu bytes of decoded data...)\n",
                         filename, Sound_GetError(), global_state.decoded_bytes);
@@ -1032,7 +1037,7 @@ int main(int argc, char **argv)
                 SDL_PollEvent(&event);
                 if ((event.type == SDL_KEYDOWN) || (event.type == SDL_QUIT))
                     done_flag = 1;
-            #endif
+            #endif /* ENABLE_EVENTS */
 
             SDL_Delay(10);
         } /* while */
@@ -1041,7 +1046,7 @@ int main(int argc, char **argv)
 
             /*
              * Sleep two buffers' worth of audio before closing, in order
-             *  to allow the playback to finish. This isn't always enough;
+             *  to allow the playback to finish. This is NOT always enough;
              *   perhaps SDL needs a way to explicitly wait for device drain?
              */
         delay = 2 * 1000 * sdl_desired.samples / sdl_desired.freq;

@@ -7,7 +7,7 @@
  *
  * This particular file may be used however you like, including copying it
  *  verbatim into a closed-source project, exploiting it commercially, and
- *  removing any trace of my name from the source (although I hope you won't
+ *  removing any trace of my name from the source (although I hope you will NOT
  *  do that). I welcome enhancements and corrections to this file, but I do
  *  not require you to send me patches if you make changes.
  *
@@ -27,7 +27,7 @@
 
 #ifdef __cplusplus
 extern "C" {
-#endif
+#endif /* __cplusplus */
 
 /**
  * Open a platform-independent filename for reading, and make it accessible
@@ -79,7 +79,7 @@ __EXPORT__ SDL_RWops *PHYSFSRWOPS_makeRWops(PHYSFS_file *handle);
 
 #ifdef __cplusplus
 }
-#endif
+#endif /* __cplusplus */
 
 #endif /* include-once blocker */
 

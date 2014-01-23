@@ -7,7 +7,7 @@
  *
  * This particular file may be used however you like, including copying it
  *  verbatim into a closed-source project, exploiting it commercially, and
- *  removing any trace of my name from the source (although I hope you won't
+ *  removing any trace of my name from the source (although I hope you will NOT
  *  do that). I welcome enhancements and corrections to this file, but I do
  *  not require you to send me patches if you make changes.
  *
@@ -39,7 +39,7 @@ static int physfsrwops_seek(SDL_RWops *rw, int offset, int whence)
         PHYSFS_sint64 current = PHYSFS_tell(handle);
         if (current == -1)
         {
-            SDL_SetError("Can't find position in file: %s",
+            SDL_SetError("Cannot find position in file: %s",
                           PHYSFS_getLastError());
             return(-1);
         } /* if */
@@ -47,12 +47,14 @@ static int physfsrwops_seek(SDL_RWops *rw, int offset, int whence)
         pos = (int) current;
         if ( ((PHYSFS_sint64) pos) != current )
         {
-            SDL_SetError("Can't fit current file position in an int!");
+            SDL_SetError("Cannot fit current file position in an int!");
             return(-1);
         } /* if */
 
-        if (offset == 0)  /* this is a "tell" call. We're done. */
+        if (offset == 0)  /* this is a "tell" call. We are done. */
+		{
             return(pos);
+		}
 
         pos += offset;
     } /* else if */
@@ -62,14 +64,14 @@ static int physfsrwops_seek(SDL_RWops *rw, int offset, int whence)
         PHYSFS_sint64 len = PHYSFS_fileLength(handle);
         if (len == -1)
         {
-            SDL_SetError("Can't find end of file: %s", PHYSFS_getLastError());
+            SDL_SetError("Cannot find end of file: %s", PHYSFS_getLastError());
             return(-1);
         } /* if */
 
         pos = (int) len;
         if ( ((PHYSFS_sint64) pos) != len )
         {
-            SDL_SetError("Can't fit end-of-file position in an int!");
+            SDL_SetError("Cannot fit end-of-file position in an int!");
             return(-1);
         } /* if */
 
@@ -87,7 +89,7 @@ static int physfsrwops_seek(SDL_RWops *rw, int offset, int whence)
         SDL_SetError("Attempt to seek past start of file.");
         return(-1);
     } /* if */
-    
+
     if (!PHYSFS_seek(handle, (PHYSFS_uint64) pos))
     {
         SDL_SetError("PhysicsFS error: %s", PHYSFS_getLastError());
@@ -189,7 +191,7 @@ SDL_RWops *PHYSFSRWOPS_openAppend(const char *fname)
     return(create_rwops(PHYSFS_openAppend(fname)));
 } /* PHYSFSRWOPS_openAppend */
 
-#endif
+#endif /* SUPPORT_PHYSFS */
 
 /* end of physfsrwops.c ... */
 

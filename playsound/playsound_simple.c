@@ -54,9 +54,9 @@ static volatile int global_done_flag = 0;
  *  We decode the audio file being played in here in small chunks and feed
  *  the device as necessary. Other solutions may want to predecode more
  *  (or all) of the file, since this needs to run fast and frequently,
- *  but since we're only sitting here and waiting for the file to play,
+ *  but since we are only sitting here and waiting for the file to play,
  *  the only real requirement is that we can decode a given audio file
- *  faster than realtime, which isn't really a problem with any modern format
+ *  faster than realtime, which is NOT really a problem with any modern format
  *  on even pretty old hardware at this point.
  */
 static void audio_callback(void *userdata, Uint8 *stream, int len)
@@ -71,7 +71,7 @@ static void audio_callback(void *userdata, Uint8 *stream, int len)
 
         if (data->decoded_bytes == 0) /* need more data! */
         {
-            /* if there wasn't previously an error or EOF, read more. */
+            /* if there was NOT previously an error or EOF, read more. */
             if ( ((sample->flags & SOUND_SAMPLEFLAG_ERROR) == 0) &&
                  ((sample->flags & SOUND_SAMPLEFLAG_EOF) == 0) )
             {
@@ -81,10 +81,10 @@ static void audio_callback(void *userdata, Uint8 *stream, int len)
 
             if (data->decoded_bytes == 0)
             {
-                /* ...there isn't any more data to read! */
+                /* ...there is NOT any more data to read! */
                 memset(stream + bw, '\0', len - bw);  /* write silence. */
                 global_done_flag = 1;
-                return;  /* we're done playback, one way or another. */
+                return;  /* we are done playback, one way or another. */
             } /* if */
         } /* if */
 
@@ -93,7 +93,7 @@ static void audio_callback(void *userdata, Uint8 *stream, int len)
         if (cpysize > data->decoded_bytes)
             cpysize = data->decoded_bytes;  /* clamp to what we have left. */
 
-        /* if it's 0, next iteration will decode more or decide we're done. */
+        /* if it is/was 0, next iteration will decode more or decide we are done. */
         if (cpysize > 0)
         {
             /* write this iteration's data to the device. */
@@ -108,7 +108,6 @@ static void audio_callback(void *userdata, Uint8 *stream, int len)
 } /* audio_callback */
 
 
-
 static void playOneSoundFile(const char *fname)
 {
     PlaysoundAudioCallbackData data;
@@ -117,7 +116,7 @@ static void playOneSoundFile(const char *fname)
     data.sample = Sound_NewSampleFromFile(fname, NULL, 65536);
     if (data.sample == NULL)
     {
-        fprintf(stderr, "Couldn't load '%s': %s.\n", fname, Sound_GetError());
+        fprintf(stderr, "Could NOT load '%s': %s.\n", fname, Sound_GetError());
         return;
     } /* if */
 
@@ -125,7 +124,7 @@ static void playOneSoundFile(const char *fname)
      * Open device in format of the the sound to be played.
      *  We open and close the device for each sound file, so that SDL
      *  handles the data conversion to hardware format; this is the
-     *  easy way out, but isn't practical for most apps. Usually you'll
+     *  easy way out, but is NOT practical for most apps. Usually you will
      *  want to pick one format for all the data or one format for the
      *  audio device and convert the data when needed. This is a more
      *  complex issue than I can describe in a source code comment, though.
@@ -138,7 +137,7 @@ static void playOneSoundFile(const char *fname)
     data.devformat.userdata = &data;
     if (SDL_OpenAudio(&data.devformat, NULL) < 0)
     {
-        fprintf(stderr, "Couldn't open audio device: %s.\n", SDL_GetError());
+        fprintf(stderr, "Could NOT open audio device: %s.\n", SDL_GetError());
         Sound_FreeSample(data.sample);
         return;
     } /* if */
@@ -150,14 +149,14 @@ static void playOneSoundFile(const char *fname)
     while (!global_done_flag)
         SDL_Delay(10);  /* just wait for the audio callback to finish. */
 
-    /* at this point, we've played the entire audio file. */
+    /* at this point, we have played the entire audio file. */
     SDL_PauseAudio(1);  /* so stop the device. */
 
     /*
      * Sleep two buffers' worth of audio before closing, in order
-     *  to allow the playback to finish. This isn't always enough;
+     *  to allow the playback to finish. This is NOT always enough;
      *   perhaps SDL needs a way to explicitly wait for device drain?
-     * Most apps don't have this issue, since they aren't explicitly
+     * Most apps do NOT have this issue, since they are NOT explicitly
      *  closing the device as soon as a sound file is done playback.
      * As an alternative for this app, you could also change the callback
      *  to write silence for a call or two before flipping global_done_flag.

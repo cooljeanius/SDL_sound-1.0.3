@@ -49,5 +49,6 @@ AC_CONFIG_FILES([Makefile
                  decoders/Makefile
                  decoders/mpglib/Makefile
                  decoders/timidity/Makefile
+                 docs/latex/Makefile
                  playsound/Makefile])
 AC_OUTPUT
